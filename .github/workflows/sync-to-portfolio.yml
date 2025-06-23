@@ -12,10 +12,12 @@ jobs:
       - name: Checkout source repo
         uses: actions/checkout@v4
 
-      - name: Copy files to temp folder
+      - name: Copy files to temp folder (excluding temp itself)
         run: |
           mkdir -p temp
-          cp -r * temp/
+          shopt -s extglob
+          cp -r !("temp") temp/
+
 
       - name: Checkout target repo
         uses: actions/checkout@v4
