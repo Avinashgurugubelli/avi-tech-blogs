@@ -3,37 +3,35 @@ name: Sync to Portfolio Website
 on:
   push:
     branches:
-      - main  # Or your default branch
+      - main
 
 jobs:
   sync:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout source repo
+      - name: Checkout source repo (system-design)
         uses: actions/checkout@v4
+        with:
+          path: source  # checkout into 'source' folder
 
-      - name: Copy files to temp folder (excluding temp itself)
-        run: |
-          mkdir -p temp
-          shopt -s extglob
-          cp -r !("temp") temp/
-
-
-      - name: Checkout target repo
+      - name: Checkout target repo (my-portfolio-website)
         uses: actions/checkout@v4
         with:
           repository: Avinashgurugubelli/my-portfolio-website
           ref: main
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: target  # checkout into 'target' folder
 
-      - name: Copy to target repo
+      - name: Copy files to target repo
         run: |
-          rm -rf public/blogs/system-design
-          mkdir -p public/blogs/system-design
-          cp -r ../temp/* public/blogs/system-design/
+          rm -rf target/public/blogs/system-design
+          mkdir -p target/public/blogs/system-design
+          cp -r source/* target/public/blogs/system-design/
 
-      - name: Commit & push changes
+      - name: Commit & Push changes to target repo
         run: |
+          cd target
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           git add public/blogs/system-design
