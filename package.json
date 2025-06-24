@@ -1,5 +1,5 @@
 {
-  "name": "your-project-name",
+  "name": "Avinash-Blogs",
   "version": "2.0.2",
   "scripts": {
     "prepare": "husky install",
