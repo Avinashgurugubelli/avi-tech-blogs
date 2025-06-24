@@ -1,0 +1,41 @@
+name: Build and Publish Markdown
+
+on:
+  push:
+    paths:
+      - 'package.json'
+      - 'blogs/**'
+      - 'scripts/**'
+      - 'webpack.config.js'
+      - 'src/**'
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generating the blogs build (Markdown + Webpack)
+        run: npm run generate:bundle
+
+      - name: Check for version change
+        id: version
+        run: echo "VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
+
+      - name: Create release artifact (only if version changed)
+        uses: actions/upload-artifact@v4
+        with:
+          name: avi-blogs-v${{ env.VERSION }}
+          path: out
