@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const OUT_ROOT = path.join(__dirname, '..', 'out');
-const BLOGS_ROOT = path.join(OUT_ROOT, 'blogs');
-const OUTPUT_INDEX = path.join(OUT_ROOT, 'index.json');
+// Accept input and output directories as parameters or use defaults
+const OUT_ROOT = process.argv[2] || path.join(__dirname, '..', 'out');
+const BLOGS_ROOT = process.argv[3] || path.join(OUT_ROOT, 'blogs');
+const OUTPUT_INDEX = process.argv[4] || path.join(OUT_ROOT, 'index.json');
 
 function readSubfolderIndexes(root) {
   const children = [];
@@ -27,7 +28,7 @@ function readSubfolderIndexes(root) {
 
 function generateRootIndex() {
   if (!fs.existsSync(BLOGS_ROOT)) {
-    console.error('No out/blogs directory found.');
+    console.error(`No blogs directory found: ${BLOGS_ROOT}`);
     process.exit(1);
   }
   const rootIndex = {

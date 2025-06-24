@@ -2,14 +2,16 @@ const fs = require('fs');
 const path = require('path');
 const JSON5 = require('json5');
 
+// Accept input and output directories as parameters or use defaults
+const INPUT_ROOT = process.argv[2] || path.join(__dirname, '..', 'out', 'blogs');
+const OUTPUT_ROOT = process.argv[3] || INPUT_ROOT;
+
 // Config: folders to exclude (case-insensitive)
 const config = {
   excludeFolders: ['images', '.git', 'node_modules'],
   acceptExtensions: ['.md', '.json', '.txt', '.html'],
   excludeFiles: ['info.json']
 };
-
-const BLOGS_ROOT = path.join(__dirname, '..', 'out', 'blogs');
 
 function formatDate(ts) {
   const date = new Date(ts);
@@ -134,7 +136,7 @@ function buildTree(dir, relPath = '') {
         return {
           label: entry.name,
           type: 'file',
-          path: path.join('blogs', relPath, entry.name).replace(/\\/g, '/'),
+          path: path.join('blogs', entryRelPath).replace(/\\/g, '/'),
           date: formatDate(stats.birthtime),
           createdOn: formatDateTime(stats.birthtime),
           ...meta
@@ -157,8 +159,8 @@ function generateIndexJsonForFolder(folderAbsPath, relPathFromBlogs = '') {
   if (fs.existsSync(outPath)) {
     fs.unlinkSync(outPath);
   }
-  // Always build from BLOGS_ROOT, passing the full relPathFromBlogs
-  const tree = buildTree(BLOGS_ROOT, relPathFromBlogs);
+  // Always build from INPUT_ROOT, passing the full relPathFromBlogs
+  const tree = buildTree(INPUT_ROOT, relPathFromBlogs);
   fs.writeFileSync(outPath, JSON.stringify(tree, null, 2), 'utf-8');
   console.log(`Generated: ${outPath}`);
   validateIndexJson(outPath);
@@ -193,21 +195,21 @@ function validateIndexJson(indexPath) {
 }
 
 function main() {
-  if (!fs.existsSync(BLOGS_ROOT)) {
-    console.error('No out/blogs directory found.');
+  if (!fs.existsSync(INPUT_ROOT)) {
+    console.error('No input directory found:', INPUT_ROOT);
     process.exit(1);
   }
 
   // Generate index.json for the root blogs folder
-  generateIndexJsonForFolder(BLOGS_ROOT, '');
+  generateIndexJsonForFolder(INPUT_ROOT, '');
 
   // Generate index.json for every immediate subfolder in blogs (except excluded)
-  fs.readdirSync(BLOGS_ROOT, { withFileTypes: true }).forEach(dirent => {
+  fs.readdirSync(INPUT_ROOT, { withFileTypes: true }).forEach(dirent => {
     if (
       dirent.isDirectory() &&
       !config.excludeFolders.some(f => f.toLowerCase() === dirent.name.toLowerCase())
     ) {
-      const subfolderAbsPath = path.join(BLOGS_ROOT, dirent.name);
+      const subfolderAbsPath = path.join(INPUT_ROOT, dirent.name);
       generateIndexJsonForFolder(subfolderAbsPath, dirent.name);
     }
   });
