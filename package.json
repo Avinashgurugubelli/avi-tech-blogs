@@ -1,6 +1,6 @@
 {
   "name": "your-project-name",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "prepare": "husky install",
     "build": "webpack --mode=production",

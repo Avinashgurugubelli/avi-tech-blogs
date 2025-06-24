@@ -32,8 +32,9 @@ jobs:
 
       - name: Check for version change
         id: version
-        run: echo "VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
-
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Create release artifact (only if version changed)
         uses: actions/upload-artifact@v4
         with:
