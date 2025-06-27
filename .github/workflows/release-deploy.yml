@@ -12,7 +12,7 @@ on:
       - 'src/**'
 
 permissions:
-  contents: write  # required to create a GitHub release
+  contents: write  # Required for creating GitHub Releases
 
 jobs:
   build:
@@ -39,31 +39,15 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Upload build output as artifact
+      - name: Create ZIP of blog output
+        run: |
+          zip -r blog-artifacts-v${{ steps.version.outputs.version }}.zip ./out
+
+      - name: Upload ZIP as build artifact (optional)
         uses: actions/upload-artifact@v4
         with:
           name: avi-blogs-v${{ steps.version.outputs.version }}
-          path: out
-
-  release:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Get version from package.json
-        id: version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: avi-blogs-v${{ steps.version.outputs.version }}
-          path: ./out
+          path: blog-artifacts-v${{ steps.version.outputs.version }}.zip
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -72,6 +56,6 @@ jobs:
           name: Release v${{ steps.version.outputs.version }}
           body: |
             Auto-generated release for blog version v${{ steps.version.outputs.version }}
-          files: ./out/**
+          files: blog-artifacts-v${{ steps.version.outputs.version }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
