@@ -2,15 +2,16 @@ name: Build and Publish Markdown
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'package.json'
       - 'blogs/**'
       - 'scripts/**'
       - 'webpack.config.js'
       - 'src/**'
-    branches:
-      - main
-
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,7 +33,7 @@ jobs:
 
       - name: Get version from package.json
         id: version
-        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
 
       - name: Upload build output as artifact
         uses: actions/upload-artifact@v4
@@ -49,7 +50,7 @@ jobs:
 
       - name: Get version from package.json
         id: version
-        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
 
       - name: Download build artifact
         uses: actions/download-artifact@v4
