@@ -101,6 +101,8 @@ function buildTree(dir, relPath = '') {
   if (fs.existsSync(infoPath)) {
     try {
       info = JSON5.parse(fs.readFileSync(infoPath, 'utf-8'));
+      // here id attribute for for finding the folder in the tree
+      info.id =  info.title.trim().replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
     } catch (e) {
       console.warn(`Warning: Could not parse info.json in ${absDir}: ${e.message}`);
       info = {};
@@ -134,6 +136,7 @@ function buildTree(dir, relPath = '') {
           meta = parseMarkdownMeta(absEntryPath);
         }
         return {
+          id: entry.name.trim().replace(/[^a-zA-Z0-9]/g, '-').toLowerCase(),
           label: entry.name,
           type: 'file',
           path: path.join('blogs', entryRelPath).replace(/\\/g, '/'),

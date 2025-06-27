@@ -1,10 +1,10 @@
 {
-    "Title": "System Design Deep Dive",
-    "Description": "This blog post provides an in-depth exploration of system design, covering key concepts such as scalability, reliability, and maintainability. It discusses the principles and best practices for designing robust software systems, with a focus on real-world applications.",
-    "Author": "Avinash Gurugubelli",
-    "References": [{
-        "Title": "Designing Data-Intensive Applications",
-        "Author": "Martin Kleppmann",
-        "Link": ""
+    "title": "System Design Deep Dive",
+    "description": "This blog post provides an in-depth exploration of system design, covering key concepts such as scalability, reliability, and maintainability. It discusses the principles and best practices for designing robust software systems, with a focus on real-world applications.",
+    "author": "Avinash Gurugubelli",
+    "references": [{
+        "title": "Designing Data-Intensive Applications",
+        "author": "Martin Kleppmann",
+        "link": ""
     }]
 }
