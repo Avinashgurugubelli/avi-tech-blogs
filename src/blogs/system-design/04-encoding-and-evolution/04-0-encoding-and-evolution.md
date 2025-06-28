@@ -35,6 +35,12 @@ references: [{
     - [1. Message PACK format](#1-message-pack-format)
     - [Size Comparison:](#size-comparison)
     - [Encode a JSON object using MessagePack in Node JS](#encode-a-json-object-using-messagepack-in-node-js)
+      - [2. Thrift and Protocol Buffers](#2-thrift-and-protocol-buffers)
+    - [Thrift Binary Protocol](#thrift-binary-protocol)
+    - [Thrift Compact Protocol](#thrift-compact-protocol)
+      - [Why Thrift Compact Protocol is Smaller? (~52 Bytes)](#why-thrift-compact-protocol-is-smaller-52-bytes)
+    - [Protocol Buffer](#protocol-buffer)
+      - [Why Protocol Buffers (Protobuf) is Smaller than Thrift (Binary \& Compact)?](#why-protocol-buffers-protobuf-is-smaller-than-thrift-binary--compact)
 - [Final Summary Table (With Real Sizes)](#final-summary-table-with-real-sizes)
 - [Refer for MessagePack, Thrift Binary \& Compact, and Protobuf examples with JavaScript code and explanations:](#refer-for-messagepack-thrift-binary--compact-and-protobuf-examples-with-javascript-code-and-explanations)
 - [Avro: Encoding and Schema Evolution](#avro-encoding-and-schema-evolution)
@@ -283,8 +289,6 @@ Format	Size (bytes)
 ### Encode a JSON object using MessagePack in Node JS
 
 Refer for example: [link](./04-1-message-packExamples-in-javascript.md)
-
-```javascript
 
 #### 2. Thrift and Protocol Buffers
 
