@@ -206,7 +206,7 @@ function main() {
   }
 
   // Generate index.json for the root blogs folder
-  generateIndexJsonForFolder(INPUT_ROOT, '');
+  // generateIndexJsonForFolder(INPUT_ROOT, '');
 
   // Generate index.json for every immediate subfolder in blogs (except excluded)
   fs.readdirSync(INPUT_ROOT, { withFileTypes: true }).forEach(dirent => {
