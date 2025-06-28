@@ -9,9 +9,9 @@
 - All the blog files (.md extensions) should be kept in the `src/blogs/` directory.
 - Directory names should be in camelCase.
 - Directory names should not contain spaces or special characters.
-- Directory names should start with numbers if they are part of a series (e.g., `01.general`, `02.advanced`).
+- Directory names should start with numbers if they are part of a series (e.g., `01-general`, `02-advanced`).
 - File names Should start with a number indicating the order of the blog post.
-  - e.g., `01.0.graph-db-vs-triple-store-notes.md`, `01.1.data-serialization.md`
+  - e.g., `01-0-graph-db-vs-triple-store-notes.md`, `01-1-data-serialization.md`
   -  Should be descriptive of the content.
   -  Use hyphens to separate words
   -  This helps in maintaining a clear and organized structure.

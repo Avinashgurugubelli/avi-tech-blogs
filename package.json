@@ -9,7 +9,7 @@
     "generate:readme": "node scripts/readme-generator.js",
     "remove:metadata": "node scripts/remove-md-meta.js out/blogs",
     "generate:bundle": "npm run build && npm run generate-blogs-index  && npm run generate-blogs-root-index && npm run remove:metadata && npm run generate:readme ",
-    "update-src-readme": "node scripts/readme-generator.js out/index.json readme.md src/"
+    "update-src-readme": "node scripts/readme-generator.js out/all-blogs-index.json readme.md src/"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^13.0.0",

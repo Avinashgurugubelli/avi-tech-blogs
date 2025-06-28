@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
+const appConstants = require('./constants');
+
 // Accept index and output readme paths as parameters or use defaults
-const indexPath = process.argv[2] || path.join(__dirname, '..', 'out', 'blogs', 'index.json');
+const indexPath = process.argv[2] || path.join(__dirname, '..', 'out', 'blogs', appConstants.BLOGS_INDEX_FILE_NAME);
 const outReadme = process.argv[3] || path.join(__dirname, '..', 'out', 'README.md');
 const linkPrefix = process.argv[4] || '';
 

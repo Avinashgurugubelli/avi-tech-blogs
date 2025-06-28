@@ -1,5 +1,5 @@
 {
-    "title": "System Design Deep Dive",
+    "title": "System Design",
     "description": "This blog post provides an in-depth exploration of system design, covering key concepts such as scalability, reliability, and maintainability. It discusses the principles and best practices for designing robust software systems, with a focus on real-world applications.",
     "author": "Avinash Gurugubelli",
     "references": [{

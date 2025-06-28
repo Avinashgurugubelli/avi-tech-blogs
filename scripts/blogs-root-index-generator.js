@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
+const appConstants = require('./constants');
+
 // Accept input and output directories as parameters or use defaults
 const OUT_ROOT = process.argv[2] || path.join(__dirname, '..', 'out');
 const BLOGS_ROOT = process.argv[3] || path.join(OUT_ROOT, 'blogs');
-const OUTPUT_INDEX = process.argv[4] || path.join(OUT_ROOT, 'FullContentIndex.json');
+const OUTPUT_INDEX = process.argv[4] || path.join(OUT_ROOT, appConstants.FULL_CONTENT_INDEX_FILE_NAME);
 
 function readSubfolderIndexes(root) {
   const children = [];
