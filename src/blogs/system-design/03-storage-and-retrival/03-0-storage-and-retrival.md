@@ -404,7 +404,7 @@ A variation of the star schema is the **snowflake schema**, where dimensions are
 ## Column Oriented Storage
 
 - In **column-oriented storage**, data is stored by **columns instead of rows**.
-- Refer this doc for more information: [link](./03.1.Column_storage_summary.md)
+- Refer this doc for more information: [link](./03-1-column-storage-summary.md)
 
 
 ## Data Cubes and Materialized Views
