@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const JSON5 = require('json5');
 
+const appConstants = require('./constants');
+
 // Accept input and output directories as parameters or use defaults
 const INPUT_ROOT = process.argv[2] || path.join(__dirname, '..', 'out', 'blogs');
 const OUTPUT_ROOT = process.argv[3] || INPUT_ROOT;
@@ -158,7 +160,7 @@ function buildTree(dir, relPath = '') {
 
 // Generate index.json for a specific folder
 function generateIndexJsonForFolder(folderAbsPath, relPathFromBlogs = '') {
-  const outPath = path.join(folderAbsPath, 'index.json');
+  const outPath = path.join(folderAbsPath, appConstants.BLOGS_INDEX_FILE_NAME);
   if (fs.existsSync(outPath)) {
     fs.unlinkSync(outPath);
   }
