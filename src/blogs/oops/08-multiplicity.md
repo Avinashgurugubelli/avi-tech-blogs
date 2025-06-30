@@ -1,4 +1,12 @@
-## 🔢 5. Multiplicity in Class Diagrams
+<!--
+author: "Avinash Gurugubelli",
+title: "**Multiplicity** defines how many **instances** of one class can be associated with **a single instance** of another class in a relationship. It sets constraints on **how many objects can participate** in the relationship.",
+
+tags: ["OOPS", "Class Diagrams", "Multiplicity"]
+references: []
+date: "2023-10-01"
+-->
+
 
 ### 🧠 What is Multiplicity?
 

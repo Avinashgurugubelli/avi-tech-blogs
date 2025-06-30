@@ -6,9 +6,9 @@ tags: ["OOP", "Programming", "Software Development"],
 references: []
 -->
 
-# 📘 Introduction to Object-Oriented Programming (OOP)
+# 📘 Introduction to Object-Oriented Programming (OOPS)
 
-**Object-Oriented Programming (OOP)** is a programming paradigm that models real-world entities as objects. It helps organize software design by bundling data and behavior into reusable units, making code easier to understand, maintain, and extend.
+**Object-Oriented Programming (OOPS)** is a programming paradigm that models real-world entities as objects. It helps organize software design by bundling data and behavior into reusable units, making code easier to understand, maintain, and extend.
 
 ---
 

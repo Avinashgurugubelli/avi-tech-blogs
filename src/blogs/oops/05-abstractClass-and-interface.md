@@ -1,13 +1,11 @@
 <!--
 author: "Avinash Gurugubelli",
-title: "Abstract Class vs Interface in OOP (With Java Examples)",
+title: "Abstract Class vs Interface in OOPS (With Java Examples)",
 description: "A comprehensive guide to understanding abstract classes and interfaces in Object-Oriented Programming with Java examples.",
 tags: ["OOP", "Abstract Class", "Interface", "Java"],
 references: []
 date: "2023-10-01"
 -->
-
-# 📘 Abstract Class vs Interface in OOP (With Java Examples)
 
 ## ❓ What is an Abstract Class?
 

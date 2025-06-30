@@ -1,8 +1,8 @@
 <!--
 author: "Avinash Gurugubelli",
-title: "Class Diagrams in OOP",
+title: "Class Diagrams",
 description: "A comprehensive guide to understanding class diagrams in Object-Oriented Programming with Java examples.",
-tags: ["OOP", "Class Diagrams", "UML", "Java"],
+tags: ["OOPS", "Class Diagrams", "UML", "Java"],
 references: []
 date: "2023-10-01"
 -->

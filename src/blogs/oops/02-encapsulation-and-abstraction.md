@@ -1,6 +1,6 @@
 <!--
 author: "Avinash Gurugubelli",
-title: "Encapsulation and Abstraction in OOP",
+title: "Encapsulation and Abstraction",
 description: "A deep dive into the concepts of encapsulation and abstraction in Object-Oriented Programming.",
 tags: ["OOP", "Encapsulation", "Abstraction", "Software Development"],
 references: []

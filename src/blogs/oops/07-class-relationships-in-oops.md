@@ -2,13 +2,10 @@
 author: "Avinash Gurugubelli",
 title: "Class Relationships in Object-Oriented Programming",
 description: "In object-oriented programming, classes often interact with each other. These **class relationships** define how objects are connected, organized, and collaborate to form a complete system. Understanding these relationships is essential for designing scalable and maintainable software.",
-tags: ["OOP", "Class Diagrams", "UML", "", ""],
+tags: ["OOPS", "Class Diagrams", "UML", "", ""],
 references: []
 date: "2023-10-01"
 -->
-
-
-## 🔗 Class Relationships in Object-Oriented Programming
 
 In object-oriented programming, classes often interact with each other. These **class relationships** define how objects are connected, organized, and collaborate to form a complete system. Understanding these relationships is essential for designing scalable and maintainable software.
 

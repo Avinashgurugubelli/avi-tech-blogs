@@ -1,13 +1,11 @@
 <!--
 author: "Avinash Gurugubelli",
 date: "2023-10-01",
-title: "Polymorphism in OOP",
+title: "Polymorphism in Object-Oriented Programming",
 description: "A comprehensive guide to understanding polymorphism in object-oriented programming with Java examples.",
 tags: ["polymorphism", "OOP", "Java", "method overriding", "method overloading"]
 -->
 
-
-# 🔁 Polymorphism in Object-Oriented Programming
 
 ## 📖 What is Polymorphism?
 
