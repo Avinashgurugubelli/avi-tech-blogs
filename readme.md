@@ -1,6 +1,24 @@
 ## Blogs Index
 
 
+## Design Patterns
+
+
+## Object-Oriented Programming
+
+- [Introduction to Object-Oriented Programming (OOP)](src/blogs/oops/01-introduction.md)
+- [Encapsulation and Abstraction in OOP](src/blogs/oops/02-encapsulation-and-abstraction.md)
+- [Inheritance in OOP: When to Use and When to Avoid](src/blogs/oops/03-inheritance.md)
+- [Polymorphism in OOP](src/blogs/oops/04-polymorphism.md)
+- [Abstract Class vs Interface in OOP (With Java Examples)](src/blogs/oops/05-abstractClass-and-interface.md)
+- [Class Diagrams in OOP](src/blogs/oops/06-class-diagrams.md)
+- [Class Relationships in Object-Oriented Programming](src/blogs/oops/07-class-relationships-in-oops.md)
+- [08-multiplicity.md](src/blogs/oops/08-multiplicity.md)
+
+
+## SOLID Principles
+
+
 ## System Design
 
 
