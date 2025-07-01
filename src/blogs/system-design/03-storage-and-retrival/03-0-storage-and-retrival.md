@@ -1,6 +1,6 @@
 <!--
 author: "Avinash Gurugubelli",
-title: "Storage and Retrieval",
+title: "Storage and Retrieval Deep Dive",
 description: "A comprehensive guide to storage and retrieval systems, covering indexing structures, transaction processing, and data warehousing.",
 tags: ["Storage", "Retrieval", "Indexing", "OLTP", "OLAP", "Data Warehousing", "Data Cubes"],
 references: [{

@@ -33,7 +33,7 @@
 
 ### Storage and Retrieval
 
-- [Storage and Retrieval](src/blogs/system-design/03-storage-and-retrival/03-0-storage-and-retrival.md)
+- [Storage and Retrieval Deep Dive](src/blogs/system-design/03-storage-and-retrival/03-0-storage-and-retrival.md)
 - [Column-Oriented Storage Summary](src/blogs/system-design/03-storage-and-retrival/03-1-column-storage-summary.md)
 
 
