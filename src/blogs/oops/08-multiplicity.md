@@ -1,6 +1,7 @@
 <!--
 author: "Avinash Gurugubelli",
-title: "**Multiplicity** defines how many **instances** of one class can be associated with **a single instance** of another class in a relationship. It sets constraints on **how many objects can participate** in the relationship.",
+title: "Multiplicity",
+description: "Multiplicity defines how many instances of one class can be associated with **a single instance** of another class in a relationship. It sets constraints on **how many objects can participate** in the relationship.",
 
 tags: ["OOPS", "Class Diagrams", "Multiplicity"]
 references: []
