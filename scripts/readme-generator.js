@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const appConstants = require('./constants');
+const { log,logLevels } = require('./logger');
 
 // Accept index and output readme paths as parameters or use defaults
 const indexPath = process.argv[2] || path.join(__dirname, '..', 'out', appConstants.FULL_CONTENT_INDEX_FILE_NAME);
@@ -51,7 +52,8 @@ function main() {
   md += renderDir(root);
 
   fs.writeFileSync(outReadme, md.trim() + '\n', 'utf-8');
-  console.log(`Generated: ${outReadme}`);
+  log(logLevels.success,`Generated: ${outReadme}`);
 }
 
+log(logLevels.info,`>>>>>> Started generating the read me >>>> `);
 main();

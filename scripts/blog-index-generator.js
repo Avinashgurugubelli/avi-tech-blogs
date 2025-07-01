@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const JSON5 = require('json5');
+const { log,logLevels } = require('./logger');
 
 const appConstants = require('./constants');
 
@@ -88,13 +89,15 @@ function parseMarkdownMeta(absEntryPath) {
       }
     });
     return meta;
-  } catch {
+  } catch (e) {
+    log('warn', `Failed to parse markdown meta for ${absEntryPath}: ${e.message}`);
     return {};
   }
 }
 
 function buildTree(dir, relPath = '') {
   const absDir = path.join(dir, relPath);
+  log(logLevels.info, `Reading directory: ${absDir}`);
   const entries = fs.readdirSync(absDir, { withFileTypes: true });
 
   // Read info.json if present and spread its fields
@@ -102,26 +105,37 @@ function buildTree(dir, relPath = '') {
   const infoPath = path.join(absDir, 'info.json');
   if (fs.existsSync(infoPath)) {
     try {
+      log(logLevels.info, `Reading info.json: ${infoPath}`);
       info = JSON5.parse(fs.readFileSync(infoPath, 'utf-8'));
-      // here id attribute for for finding the folder in the tree
-      info.id =  info.title.trim().replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+      info.id = info.title && typeof info.title === 'string'
+        ? info.title.trim().replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()
+        : undefined;
     } catch (e) {
-      console.warn(`Warning: Could not parse info.json in ${absDir}: ${e.message}`);
+      log(logLevels.error, `Could not parse info.json in ${absDir}: ${e.message}`);
       info = {};
     }
+  }
+  else{
+    log(logLevels.warn, `Info file not found in the path: ${infoPath}`);
   }
 
   const children = entries
     .filter(entry => {
       if (entry.isDirectory() && config.excludeFolders.some(f => f.toLowerCase() === entry.name.toLowerCase())) {
+        log(logLevels.info, `Skipping excluded folder: ${entry.name}`);
         return false;
       }
       if (entry.isFile() && config.excludeFiles.some(f => f.toLowerCase() === entry.name.toLowerCase())) {
+        log(logLevels.info, `Skipping excluded file: ${entry.name}`);
         return false;
       }
       if (entry.isFile() && Array.isArray(config.acceptExtensions)) {
         const ext = path.extname(entry.name).toLowerCase();
-        return config.acceptExtensions.includes(ext);
+        const accepted = config.acceptExtensions.includes(ext);
+        if (!accepted) {
+          log(logLevels.info, `Skipping file (extension not accepted): ${entry.name}`);
+        }
+        return accepted;
       }
       return true;
     })
@@ -130,7 +144,7 @@ function buildTree(dir, relPath = '') {
       const absEntryPath = path.join(dir, entryRelPath);
       const stats = fs.statSync(absEntryPath);
       if (entry.isDirectory()) {
-        // Pass the full relative path down
+        log(logLevels.info, `Entering subdirectory: ${entryRelPath}`);
         return buildTree(dir, entryRelPath);
       } else {
         let meta = {};
@@ -149,7 +163,6 @@ function buildTree(dir, relPath = '') {
       }
     });
 
-  // Spread info.json fields directly onto the directory node
   return {
     label: relPath ? path.basename(absDir) : 'blogs',
     type: 'directory',
@@ -158,20 +171,19 @@ function buildTree(dir, relPath = '') {
   };
 }
 
-// Generate index.json for a specific folder
 function generateIndexJsonForFolder(folderAbsPath, relPathFromBlogs = '') {
   const outPath = path.join(folderAbsPath, appConstants.BLOGS_INDEX_FILE_NAME);
   if (fs.existsSync(outPath)) {
     fs.unlinkSync(outPath);
+    log(logLevels.info, `Removed existing index: ${outPath}`);
   }
-  // Always build from INPUT_ROOT, passing the full relPathFromBlogs
+  log(logLevels.info, `Generating index for: ${folderAbsPath} (rel: ${relPathFromBlogs})`);
   const tree = buildTree(INPUT_ROOT, relPathFromBlogs);
   fs.writeFileSync(outPath, JSON.stringify(tree, null, 2), 'utf-8');
-  console.log(`Generated: ${outPath}`);
+  log('success', `Generated: ${outPath}`);
   validateIndexJson(outPath);
 }
 
-// Validation function for index.json
 function validateIndexJson(indexPath) {
   try {
     const data = fs.readFileSync(indexPath, 'utf-8');
@@ -192,23 +204,20 @@ function validateIndexJson(indexPath) {
     }
 
     validateNode(json);
-    console.log(`✅ Validation passed for ${indexPath}`);
+    log('success', `Validation passed for ${indexPath}`);
   } catch (e) {
-    console.error(`❌ Validation failed for ${indexPath}: ${e.message}`);
+    log(logLevels.error, `Validation failed for ${indexPath}: ${e.message}`);
     process.exit(1);
   }
 }
 
 function main() {
+  log(logLevels.info, `Starting blog index generation`);
   if (!fs.existsSync(INPUT_ROOT)) {
-    console.error('No input directory found:', INPUT_ROOT);
+    log(logLevels.error, 'No input directory found:', INPUT_ROOT);
     process.exit(1);
   }
 
-  // Generate index.json for the root blogs folder
-  // generateIndexJsonForFolder(INPUT_ROOT, '');
-
-  // Generate index.json for every immediate subfolder in blogs (except excluded)
   fs.readdirSync(INPUT_ROOT, { withFileTypes: true }).forEach(dirent => {
     if (
       dirent.isDirectory() &&
@@ -218,6 +227,8 @@ function main() {
       generateIndexJsonForFolder(subfolderAbsPath, dirent.name);
     }
   });
+  log(logLevels.success, ` ******************* Blog index generation completed ******************`);
 }
 
+log(logLevels.info,`>>>>>> Started generating blogs index file >>>> `);
 main();

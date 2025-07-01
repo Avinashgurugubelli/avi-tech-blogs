@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { log,logLevels } = require('./logger');
 
 // Usage: node scripts/remove-metadata.js [directory]
 // Default: out/blogs
@@ -21,7 +22,7 @@ function removeTopMeta(filePath) {
   const newContent = content.replace(/^<!--[\s\S]*?-->\s*/m, '');
   if (newContent !== content) {
     fs.writeFileSync(filePath, newContent, 'utf-8');
-    console.log(`Removed metadata from: ${filePath}`);
+    log(logLevels.info, `Removed metadata from: ${filePath}`);
   }
 }
 
