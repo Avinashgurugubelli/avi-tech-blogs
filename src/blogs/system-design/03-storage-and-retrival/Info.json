@@ -1,6 +1,6 @@
 {
     "title": "Storage and Retrieval",
-    "description": "This blog post discusses the methods and best practices for storing and retrieving data efficiently in software applications. It covers various storage solutions, including databases, file systems, and cloud storage",
+    "description": "This blog post discusses the methods and best practices for storing and retrieving data efficiently in software applications. It covers various storage solutions, including databases, file systems, and cloud storage.",
     "author": "Avinash Gurugubelli",
     "references": [{
         "title": "Designing Data-Intensive Applications",

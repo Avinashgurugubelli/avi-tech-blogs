@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const JSON5 = require('json5');
-const { log,logLevels } = require('./logger');
+const { log, logLevels } = require('./logger');
 
 const appConstants = require('./constants');
 
@@ -34,6 +34,13 @@ function formatDateTime(ts) {
   const min = String(date.getMinutes()).padStart(2, '0');
   const ss = String(date.getSeconds()).padStart(2, '0');
   return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+}
+
+// Helper: Find a file in a directory, ignoring case
+function findFileIgnoreCase(dir, filename) {
+  const files = fs.readdirSync(dir);
+  const lower = filename.toLowerCase();
+  return files.find(f => f.toLowerCase() === lower) || null;
 }
 
 // Parse meta from markdown comment at the top of the file
@@ -100,10 +107,11 @@ function buildTree(dir, relPath = '') {
   log(logLevels.info, `Reading directory: ${absDir}`);
   const entries = fs.readdirSync(absDir, { withFileTypes: true });
 
-  // Read info.json if present and spread its fields
+  // Find info.json in a case-insensitive way
   let info = {};
-  const infoPath = path.join(absDir, 'info.json');
-  if (fs.existsSync(infoPath)) {
+  const infoFile = findFileIgnoreCase(absDir, 'info.json');
+  const infoPath = infoFile ? path.join(absDir, infoFile) : null;
+  if (infoPath && fs.existsSync(infoPath)) {
     try {
       log(logLevels.info, `Reading info.json: ${infoPath}`);
       info = JSON5.parse(fs.readFileSync(infoPath, 'utf-8'));
@@ -114,9 +122,8 @@ function buildTree(dir, relPath = '') {
       log(logLevels.error, `Could not parse info.json in ${absDir}: ${e.message}`);
       info = {};
     }
-  }
-  else{
-    log(logLevels.warn, `Info file not found in the path: ${infoPath}`);
+  } else {
+    log(logLevels.warn, `Info file not found in the path: ${path.join(absDir, 'info.json')}`);
   }
 
   const children = entries
