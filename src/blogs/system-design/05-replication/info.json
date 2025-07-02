@@ -1,0 +1,10 @@
+{
+    "title": "Replication",
+    "description": "Keeping a copy of the same data on multiple machines are connected via a network.",
+    "author": "Avinash Gurugubelli",
+    "references": [{
+        "title": "Designing Data-Intensive Applications",
+        "author": "Martin Kleppmann",
+        "link": ""
+    }]
+}
