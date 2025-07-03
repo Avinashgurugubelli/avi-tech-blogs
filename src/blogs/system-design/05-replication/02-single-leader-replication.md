@@ -26,36 +26,34 @@ references: [{
 }]
 -->
 
-# The Complete Beginner's Guide to Database Replication: Leader-Follower (Single leader Replication) Architecture Explained
+# Leader-Follower (Single leader Replication) Architecture Explained
 
 ## Understanding the Leader-Follower Model
 
-### The Cast of Characters
+  #### The Leader (Master):
+  - The primary database that accepts all write operations
+  - Like the conductor of an orchestra — all updates flow through it
+  - **Example**: When a customer places an order, it goes to the leader first
 
-#### The Leader (Master):
-- The primary database that accepts all write operations
-- Like the conductor of an orchestra — all updates flow through it
-- **Example**: When a customer places an order, it goes to the leader first
+  #### The Followers (Slaves/Read Replicas):
+  - Copies that replicate data from the leader
+  - Can handle read operations but not writes
+  - Like assistants who mirror the leader's work
 
-#### The Followers (Slaves/Read Replicas):
-- Copies that replicate data from the leader
-- Can handle read operations but not writes
-- Like assistants who mirror the leader's work
+### How They Work Together ?
 
-### How They Work Together
+  #### Write Process:
+  
+  1. Client sends write request to leader  
+  2. Leader records the change locally  
+  3. Leader forwards change to followers (more on this timing later)  
 
-#### Write Process:
-1. Client sends write request to leader  
-2. Leader records the change locally  
-3. Leader forwards change to followers (more on this timing later)  
+  #### Read Process:
+  - Clients can read from leader or any follower  
+  - Reads from followers reduce load on leader  
 
-#### Read Process:
-- Clients can read from leader or any follower  
-- Reads from followers reduce load on leader  
+  ![](../images/master-slave-replication.png)
 
-![](../images/master-slave-replication.png)
-
----
 
 ## Synchronous vs. Asynchronous: The Replication Timing Dilemma
 
@@ -172,7 +170,6 @@ the side effects are absolutely deterministic.
   - Works across different versions  
 - **Cons**: Slightly more overhead  
 
----
 
 ## The Consistency Trade-off: Dealing with Replication Lag
 

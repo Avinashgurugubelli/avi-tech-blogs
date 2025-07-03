@@ -1,7 +1,7 @@
 
 <!--
 author: "Avinash Gurugubelli",
-title: "Leader and Followers",
+title: "Replication Introduction",
 description: "Introduction to Replication"  
 tags: ["Database Replication", "Distributed Systems", "High Availability", "Data Consistency"],
 references: [{
