@@ -19,6 +19,12 @@
 
 ## SOLID Principles
 
+- [Introduction to SOLID Principles in OOP](src/blogs/solid-principles/01-introduction.md)
+- [Single Responsibility Principle](src/blogs/solid-principles/02-single-responsibility-principle.md)
+- [Dependency Inversion Principle](src/blogs/solid-principles/03-dependency-inversion-principle.md)
+- [Interface Segregation Principle](src/blogs/solid-principles/04-interface-segregation-principle.md)
+- [Open Closed Principle](src/blogs/solid-principles/05-open-close-principle.md)
+- [Liskov Substitution Principle](src/blogs/solid-principles/06-liskov-substitution-principle.md)
 
 
 ## System Design
@@ -43,3 +49,11 @@
 - [MessagePack Examples in JavaScript](src/blogs/system-design/04-encoding-and-evolution/04-1-message-packExamples-in-javascript.md)
 - [Serialization Format Comparison](src/blogs/system-design/04-encoding-and-evolution/04-2-serialization-comparison.md)
 - [Serialization Comparison: Avro](src/blogs/system-design/04-encoding-and-evolution/04-3-serialization-comparison-avro.md)
+
+
+### Replication
+
+- [Leader and Followers](src/blogs/system-design/05-replication/01-introduction.md)
+- [Single leader Replication](src/blogs/system-design/05-replication/02-single-leader-replication.md)
+- [Multi-Leader Replication](src/blogs/system-design/05-replication/03-multi-leader-replication.md)
+- [Leaderless Replication](src/blogs/system-design/05-replication/04-leader-less-replication.md)
