@@ -53,7 +53,7 @@
 
 ### Replication
 
-- [Leader and Followers](src/blogs/system-design/05-replication/01-introduction.md)
+- [Replication Introduction](src/blogs/system-design/05-replication/01-introduction.md)
 - [Single leader Replication](src/blogs/system-design/05-replication/02-single-leader-replication.md)
 - [Multi-Leader Replication](src/blogs/system-design/05-replication/03-multi-leader-replication.md)
 - [Leaderless Replication](src/blogs/system-design/05-replication/04-leader-less-replication.md)
