@@ -59,7 +59,7 @@
 - [Leaderless Replication](src/blogs/system-design/05-replication/04-leader-less-replication.md)
 
 
-### 06-partitioning
+### Partitioning
 
 - [What is Partitioning? (Sharding)](src/blogs/system-design/06-partitioning/01-introduction.md)
 - [Partitioning Strategies in Distributed Databases](src/blogs/system-design/06-partitioning/02-partitioning-strategies.md)

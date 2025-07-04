@@ -1,0 +1,10 @@
+{
+    "title": "Partitioning",
+    "description": "Partitioning helps split massive datasets across multiple nodes, improving scalability and performance.",
+    "author": "Avinash Gurugubelli",
+    "references": [{
+        "title": "Designing Data-Intensive Applications",
+        "author": "Martin Kleppmann",
+        "link": ""
+    }]
+}
