@@ -57,3 +57,9 @@
 - [Single leader Replication](src/blogs/system-design/05-replication/02-single-leader-replication.md)
 - [Multi-Leader Replication](src/blogs/system-design/05-replication/03-multi-leader-replication.md)
 - [Leaderless Replication](src/blogs/system-design/05-replication/04-leader-less-replication.md)
+
+
+### 06-partitioning
+
+- [What is Partitioning? (Sharding)](src/blogs/system-design/06-partitioning/01-introduction.md)
+- [Partitioning Strategies in Distributed Databases](src/blogs/system-design/06-partitioning/02-partitioning-strategies.md)
