@@ -63,3 +63,6 @@
 
 - [What is Partitioning? (Sharding)](src/blogs/system-design/06-partitioning/01-introduction.md)
 - [Partitioning Strategies in Distributed Databases](src/blogs/system-design/06-partitioning/02-partitioning-strategies.md)
+- [Partition Rebalancing Strategies: Fixed, Dynamic, and Proportional Explained](src/blogs/system-design/06-partitioning/03-rebalancing-partitions.md)
+- [Partition Rebalancing Strategies: More Examples](src/blogs/system-design/06-partitioning/04-rebalancing-scenarios-examples.md)
+- [Request Routing and Parallel Query Execution in Distributed Systems](src/blogs/system-design/06-partitioning/05-request-routing.md)
