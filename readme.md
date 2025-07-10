@@ -33,6 +33,7 @@
 ### General System Design Principles
 
 - [Applications of Property Graphs vs Triple Stores (RDF)](src/blogs/system-design/01-general/01-0-graph-db-vs-triple-store-notes.md)
+- [🧬 How MVCC Tracks Row Versions Internally](src/blogs/system-design/01-general/01-mvcc.md)
 - [Sample Query Comparison: SQL, CQL (Cypher), SPARQL](src/blogs/system-design/01-general/02-0-graph-query-examples.md)
 - [Horizontal Scaling Practice Guide](src/blogs/system-design/01-general/02-1-horizontal-scaling-practice.md)
 
@@ -66,3 +67,10 @@
 - [Partition Rebalancing Strategies: Fixed, Dynamic, and Proportional Explained](src/blogs/system-design/06-partitioning/03-rebalancing-partitions.md)
 - [Partition Rebalancing Strategies: More Examples](src/blogs/system-design/06-partitioning/04-rebalancing-scenarios-examples.md)
 - [Request Routing and Parallel Query Execution in Distributed Systems](src/blogs/system-design/06-partitioning/05-request-routing.md)
+
+
+### Transactions
+
+- [Transactions in Databases: ACID, Single vs Multi-Object Operations Explained](src/blogs/system-design/07-transactions/01-introduction.md)
+- [Understanding Weak Isolation Levels in Databases](src/blogs/system-design/07-transactions/02-weak-isolation.md)
+- [Common Concurrency Issues in Database Transactions](src/blogs/system-design/07-transactions/03-concurrency-issues.md)

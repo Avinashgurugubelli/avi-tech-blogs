@@ -152,7 +152,7 @@ Even if other transactions make updates while yours is running, **you won’t se
     └────┴─────────┴────────┴──────────┴───────────────────────┘
   ```
   ![](../images/SnapShotIsolationMVCC.png)
-- For more Info [refer](./more-info/01-mvcc.md)
+- For more Info [refer](../01-general/01-mvcc.md)
 
 
 ### 🔧 Ideal Use Cases

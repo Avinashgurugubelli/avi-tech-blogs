@@ -1,6 +1,6 @@
 <!--
 author: "Avinash Gurugubelli",
-title: "🔄 Common Concurrency Issues in Database Transactions",
+title: "Common Concurrency Issues in Database Transactions",
 description: "A practical guide to understanding Lost Updates, Write Skew, and Phantom Reads — with real SQL examples, fixes using locking, atomic operations, optimistic concurrency control, and isolation levels like Serializable and Snapshot Isolation.",
 tags: [
   "Database Concurrency",
