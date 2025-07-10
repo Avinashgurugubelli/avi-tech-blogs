@@ -32,7 +32,7 @@ references: [{
 In MVCC (Multi-Version Concurrency Control), rows in a database table are **not overwritten** during updates or deletes. Instead, **each version of a row is tracked separately**, allowing concurrent transactions to read consistent snapshots without blocking.
 
 
-![](../../images/SnapShotIsolationMVCC.png)
+![](../images/SnapShotIsolationMVCC.png)
 
 ---
 
