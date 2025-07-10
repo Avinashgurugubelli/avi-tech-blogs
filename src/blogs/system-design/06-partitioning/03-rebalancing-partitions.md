@@ -288,6 +288,9 @@ Auto-rebalancing + auto-failure detection can create feedback loops → cascadin
 
 ### 🔍 Why Consistent Hashing is Widely Adopted
 ✅ Minimal disruption during scaling (new node = only a few keys moved).
+
 ✅ Supports virtual nodes, enabling smooth even distribution.
+
 ✅ Excellent fault tolerance and node churn handling.
+
 ✅ Used in cloud-scale databases and event-driven systems.
