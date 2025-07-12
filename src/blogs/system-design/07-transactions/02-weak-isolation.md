@@ -72,6 +72,20 @@ The **Read Committed** isolation level is very common. It guarantees:
 2. **No Dirty Writes**: You never overwrite uncommitted changes.
    > In other words: When writing to the database, you will only overwrite data that has been committed (no dirty writes)
 
+### 🕵️‍♂️ Read Committed Isolation: Under the Hood
+
+```
+┌────┬─────────┬────────┬──────────┐
+│ id │ balance │ txn_id │ committed│ 
+├────┼─────────┼────────┼──────────┤
+│101 │ $500    │ 123    │ true     │ ← Visible to readers
+│101 │ $400    │ 124    │ false    │ ← Transaction A's uncommitted write
+└────┴─────────┴────────┴──────────┘
+```
+- Readers always see the latest committed version
+- Writers create new versions (visible only after commit)
+- For Info refer: [Refer](../01-general/read-commit-isolation.md)
+
 ### ✅ Prevents:
 - Seeing incomplete results of another transaction
 - Conflicting writes corrupting data
