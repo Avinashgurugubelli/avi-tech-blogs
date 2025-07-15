@@ -1,3 +1,21 @@
+<!---
+title: "Read Committed Isolation Level: Implementation Details",
+description: "A detailed look at the Read Committed isolation level, its guarantees, mechanisms, and optimizations.",
+author: "Avinash Gurugubelli"
+tags: [
+  "Database Transactions",
+  "Isolation Levels"
+],
+references: [{
+  title: "Designing Data-Intensive Applications",
+  authors: ["Martin Kleppmann"],
+  publisher: "O'Reilly Media",
+  year: 2017,
+  url: "https://dataintensive.net/"
+}],
+date: 2023-10-01
+-->
+
 # Read Committed Isolation Level: Implementation Details
 
 ## Core Guarantees
