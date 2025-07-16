@@ -162,6 +162,7 @@ function buildTree(dir, relPath = '') {
           id: entry.name.trim().replace(/[^a-zA-Z0-9]/g, '-').toLowerCase(),
           label: entry.name,
           type: 'file',
+          sourcePath: appConstants.BLOG_FILE_SOURCE_BASE_PATH + entryRelPath.replace(/\\/g, '/'),
           path: path.join('blogs', entryRelPath).replace(/\\/g, '/'),
           date: formatDate(stats.birthtime),
           createdOn: formatDateTime(stats.birthtime),
