@@ -33,6 +33,9 @@ function generateBlogMarkdown(blogTree) {
 
   let markdown = `## ✍️ Latest Blog Posts\n\n`;
   markdown += renderDir(blogTree, 0, LINK_PREFIX, order).trim();
+
+  log(logLevels.debug, "Generated blog section:\n", markdown);
+
   return markdown;
 }
 
