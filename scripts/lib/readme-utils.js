@@ -24,19 +24,29 @@ function getBlogsOrder() {
 }
 
 
-
 function sortChildrenByOrder(children, order) {
-    const orderMap = new Map(order.map((name, index) => [name.toLowerCase(), index]));
+  return children.sort((a, b) => {
+    const aLabel = normalizeLabel(a.label);
+    const bLabel = normalizeLabel(b.label);
 
-    return children.slice().sort((a, b) => {
-        const aName = (a.id || a.label || '').toLowerCase();
-        const bName = (b.id || b.label || '').toLowerCase();
+    const aIdx = order.indexOf(aLabel);
+    const bIdx = order.indexOf(bLabel);
 
-        const aIdx = orderMap.has(aName) ? orderMap.get(aName) : Infinity;
-        const bIdx = orderMap.has(bName) ? orderMap.get(bName) : Infinity;
+    // If not in the order list, put it at the end alphabetically
+    if (aIdx === -1 && bIdx === -1) return aLabel.localeCompare(bLabel);
+    if (aIdx === -1) return 1;
+    if (bIdx === -1) return -1;
 
-        return aIdx - bIdx;
-    });
+    return aIdx - bIdx;
+  });
+}
+
+function normalizeLabel(label) {
+  return label
+    .toLowerCase()
+    .replace(/\s+/g, "-")       // spaces to dashes
+    .replace(/[^\w-]/g, "")     // remove special chars
+    .trim();
 }
 
 
