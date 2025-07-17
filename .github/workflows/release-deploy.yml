@@ -76,21 +76,28 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Clone profile repo (avinashgurugubelli)
-        run: |
-          git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/Avinashgurugubelli/avinashgurugubelli.git ../profile-repo
-
+      
+      - name: Regenerate blog output
+        run: npm run generate:bundle
+      
       - name: 🔍 Debug build output directory
         run: |
           echo "Listing contents of project root"
           ls -la
           echo "Listing contents of out directory"
-          ls -la out
+          ls -la out  
+
+      - name: Clone profile repo (avinashgurugubelli)
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/Avinashgurugubelli/avinashgurugubelli.git ../profile-repo
+      - name: 📁 List contents of cloned profile repo
+        run: |
+          echo "Contents of ../profile-repo:"
+          ls -la ../profile-repo
           
       - name: Run script to update README in profile repo
         run: |
-          node scripts/update-git-overview-readme.js ../profile-repo/README.md src/blogs/info.json
+          node scripts/update-git-overview-readme.js ../profile-repo/README.md out/all-blogs-index.json
         env:
           NODE_ENV: production
 
