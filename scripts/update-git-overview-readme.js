@@ -1,46 +1,47 @@
-// scripts/update-git-overview-readme.js
 const fs = require("fs");
 const path = require("path");
 
-const readmePath = process.argv[2]; // ../profile-repo/README.md
-const infoJsonPath = process.argv[3]; // src/blogs/info.json
+const START_MARKER = "<!-- START BLOGS -->";
+const END_MARKER = "<!-- END BLOGS -->";
 
-function formatBlogList(blogs) {
-  return blogs.map(blog => `- [${blog.title}](${blog.url})`).join("\n");
+const [,, readmePath, jsonPath] = process.argv;
+
+function generateBlogMarkdown(blogs) {
+  return blogs.map(blog => `- [${blog.title}](${blog.link})`).join("\n");
 }
 
-function updateReadme(readmeContent, blogListMarkdown) {
-  const startMarker = "<!-- START BLOGS -->";
-  const endMarker = "<!-- END BLOGS -->";
-
-  const startIndex = readmeContent.indexOf(startMarker);
-  const endIndex = readmeContent.indexOf(endMarker);
-
-  if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
-    throw new Error("Markers not found or in wrong order in README.md");
+function updateReadme(readme, newSection) {
+  const start = readme.indexOf(START_MARKER);
+  const end = readme.indexOf(END_MARKER);
+  if (start === -1 || end === -1 || end < start) {
+    throw new Error("Markers not found or misordered in README.md");
   }
 
   return (
-    readmeContent.slice(0, startIndex + startMarker.length) +
-    "\n" +
-    blogListMarkdown +
-    "\n" +
-    readmeContent.slice(endIndex)
+    readme.slice(0, start + START_MARKER.length) +
+    "\n\n" +
+    newSection +
+    "\n\n" +
+    readme.slice(end)
   );
 }
 
 function main() {
-  console.log("🚀 Starting README blog section update...");
+  console.log("[INFO] 🚀 Starting README blog section update...");
 
-  const infoJson = JSON.parse(fs.readFileSync(infoJsonPath, "utf-8"));
-  const blogMarkdown = formatBlogList(infoJson.blogs);
+  const infoJson = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
 
-  let readme = fs.readFileSync(readmePath, "utf-8");
-  readme = updateReadme(readme, blogMarkdown);
+  const blogs = infoJson.blogs || [];
+  if (blogs.length === 0) {
+    console.warn("[WARN] No blogs found in info.json");
+  }
 
-  fs.writeFileSync(readmePath, readme, "utf-8");
+  const newSection = generateBlogMarkdown(blogs);
+  const readme = fs.readFileSync(readmePath, "utf-8");
+  const updated = updateReadme(readme, newSection);
 
-  console.log("✅ README.md updated successfully.");
+  fs.writeFileSync(readmePath, updated, "utf-8");
+  console.log("[SUCCESS] ✅ README blog section updated!");
 }
 
 main();

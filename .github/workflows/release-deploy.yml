@@ -12,7 +12,7 @@ on:
       - 'src/**'
 
 permissions:
-  contents: write
+  contents: write  # Required for pushing to repos and creating releases
 
 jobs:
   build:
@@ -43,7 +43,7 @@ jobs:
         run: |
           zip -r blog-artifacts-v${{ steps.version.outputs.version }}.zip ./out
 
-      - name: Upload ZIP as build artifact (optional)
+      - name: Upload ZIP as build artifact
         uses: actions/upload-artifact@v4
         with:
           name: avi-blogs-v${{ steps.version.outputs.version }}
@@ -63,7 +63,7 @@ jobs:
   sync-readme-to-profile:
     name: Sync README to Profile Repo
     runs-on: ubuntu-latest
-    needs: build
+    needs: build  # Ensure blog build is complete
 
     steps:
       - name: Checkout this (avi-tech-blogs) repo
@@ -81,7 +81,7 @@ jobs:
         run: |
           git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/Avinashgurugubelli/avinashgurugubelli.git ../profile-repo
 
-      - name: Run script to update README
+      - name: Run script to update README in profile repo
         run: |
           node scripts/update-git-overview-readme.js ../profile-repo/README.md src/blogs/info.json
         env:
