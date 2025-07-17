@@ -92,7 +92,7 @@ jobs:
           git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/Avinashgurugubelli/avinashgurugubelli.git ../profile-repo
       - name: 📁 List contents of cloned profile repo
         run: |
-          echo "Contents of ../profile-repo:"
+          echo "Target README:"
           ls -la ../profile-repo
           
       - name: Run script to update README in profile repo

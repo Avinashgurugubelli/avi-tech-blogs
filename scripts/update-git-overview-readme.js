@@ -5,8 +5,11 @@ const { log, logLevels } = require("./logger");
 
 const START_MARKER = "<!-- START BLOGS -->";
 const END_MARKER = "<!-- END BLOGS -->";
-const README_PATH = path.join(__dirname, "..", "README.md");
-const INDEX_PATH = path.join(__dirname, "..", "out", "all-blogs-index.json");
+
+// ✅ Accept paths from CLI args
+const args = process.argv.slice(2);
+const README_PATH = args[0] || path.join(__dirname, "..", "README.md");
+const INDEX_PATH = args[1] || path.join(__dirname, "..", "out", "all-blogs-index.json");
 
 function injectSection(content, section) {
   const start = content.indexOf(START_MARKER);
@@ -31,6 +34,9 @@ function generateBlogMarkdown(blogTree) {
 
 function main() {
   log(logLevels.info, "🚀 Starting README blog section update...");
+
+  log(logLevels.debug, `Using README: ${README_PATH}`);
+  log(logLevels.debug, `Using Index JSON: ${INDEX_PATH}`);
 
   if (!fs.existsSync(INDEX_PATH)) {
     log(logLevels.error, `Missing: ${INDEX_PATH}`);
