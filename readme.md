@@ -1,8 +1,4 @@
-## Blogs Index
-
-
-## Design Patterns
-
+## ✍️ Latest Blog Posts 
 
 
 ## Object-Oriented Programming

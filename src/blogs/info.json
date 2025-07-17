@@ -1,5 +1,6 @@
 {
     "author": "Avinash Gurugubelli",
+    "description": "This file contains the list of technical blogs written by Avinash Gurugubelli. blogs order keys should match the keys in the blogs directory.",
     "blogsOrder": [
         "oops",
         "solid-principles",
