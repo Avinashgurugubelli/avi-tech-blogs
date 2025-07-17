@@ -59,3 +59,43 @@ jobs:
           files: blog-artifacts-v${{ steps.version.outputs.version }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  sync-readme-to-profile:
+    name: Sync README to Profile Repo
+    runs-on: ubuntu-latest
+    needs: build  # Wait for blog build
+
+    steps:
+      - name: Checkout this (avi-tech-blogs) repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install deps for sync script
+        run: npm ci
+
+      - name: Clone profile repo (avinashgurugubelli)
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/Avinashgurugubelli/avinashgurugubelli.git ../profile-repo
+          ls ../profile-repo
+
+      - name: Run script to update README
+        run: |
+          node scripts/update-git-overview-readme.js
+        env:
+          NODE_ENV: production
+
+      - name: Commit & Push to profile repo
+        working-directory: ../profile-repo
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "🔄 Auto-sync blog section from avi-tech-blogs"
+          git push origin main
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
