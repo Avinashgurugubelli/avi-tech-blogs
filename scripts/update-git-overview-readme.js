@@ -10,6 +10,7 @@ const END_MARKER = "<!-- END BLOGS -->";
 const args = process.argv.slice(2);
 const README_PATH = args[0] || path.join(__dirname, "..", "README.md");
 const INDEX_PATH = args[1] || path.join(__dirname, "..", "out", "all-blogs-index.json");
+const LINK_PREFIX = args[2] || "src/";
 
 function injectSection(content, section) {
   const start = content.indexOf(START_MARKER);
@@ -27,8 +28,11 @@ function injectSection(content, section) {
 
 function generateBlogMarkdown(blogTree) {
   const order = getBlogsOrder();
+
+  log(logLevels.info, `Using blogs order: ${order.join(", ")}`);
+
   let markdown = `## ✍️ Latest Blog Posts\n\n`;
-  markdown += renderDir(blogTree, 0, "src/", order).trim();
+  markdown += renderDir(blogTree, 0, LINK_PREFIX, order).trim();
   return markdown;
 }
 
