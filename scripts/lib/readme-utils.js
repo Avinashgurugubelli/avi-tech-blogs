@@ -74,7 +74,22 @@ function renderDir(dir, depth = 0, linkPrefix = '', blogsOrder = []) {
     return md;
 }
 
+function extractBlogRoot(index) {
+  if (
+    Array.isArray(index.children) &&
+    index.children.length === 1 &&
+    index.children[0].label === 'blogs'
+  ) {
+    return index.children[0];
+  }
+  return index;
+}
+
+module.exports = { extractBlogRoot };
+
+
 module.exports = {
     getBlogsOrder,
-    renderDir
+    renderDir,
+    extractBlogRoot
 };

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { getBlogsOrder, renderDir } = require("./lib/readme-utils");
+const { getBlogsOrder, renderDir, extractBlogRoot } = require("./lib/readme-utils");
 const { log, logLevels } = require("./logger");
 
 const START_MARKER = "<!-- START BLOGS -->";
@@ -50,10 +50,11 @@ function main() {
     process.exit(1);
   }
 
-  const blogTree = JSON.parse(fs.readFileSync(INDEX_PATH, "utf-8"));
-  const readmeContent = fs.readFileSync(README_PATH, "utf-8");
+  const index = JSON.parse(fs.readFileSync(INDEX_PATH, "utf-8"));
+  const root = extractBlogRoot(index); // ✅ Trust this utility to extract "blogs"
 
-  const newSection = generateBlogMarkdown(blogTree);
+  const readmeContent = fs.readFileSync(README_PATH, "utf-8");
+  const newSection = generateBlogMarkdown(root);
   const updatedContent = injectSection(readmeContent, newSection);
 
   fs.writeFileSync(README_PATH, updatedContent, "utf-8");
