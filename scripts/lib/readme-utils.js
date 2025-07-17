@@ -30,17 +30,19 @@ function getBlogsOrder() {
 }
 
 function sortChildrenByOrder(children, order) {
+    const orderMap = new Map(order.map((name, index) => [name.toLowerCase(), index]));
+
     return children.slice().sort((a, b) => {
         const aName = (a.id || a.label || '').toLowerCase();
         const bName = (b.id || b.label || '').toLowerCase();
-        const aIdx = order.indexOf(aName);
-        const bIdx = order.indexOf(bName);
-        if (aIdx === -1 && bIdx === -1) return 0;
-        if (aIdx === -1) return 1;
-        if (bIdx === -1) return -1;
+
+        const aIdx = orderMap.has(aName) ? orderMap.get(aName) : Infinity;
+        const bIdx = orderMap.has(bName) ? orderMap.get(bName) : Infinity;
+
         return aIdx - bIdx;
     });
 }
+
 
 function renderDir(dir, depth = 0, linkPrefix = '', blogsOrder = []) {
     log(logLevels.debug, `Rendering directory: ${dir.label} at depth ${depth}`);
