@@ -97,7 +97,7 @@ jobs:
           
       - name: Run script to update README in profile repo
         run: |
-          node scripts/update-git-overview-readme.js ../profile-repo/README.md out/all-blogs-index.json https://github.com/Avinashgurugubelli/avi-tech-blogs/blob/main/
+          node scripts/update-git-overview-readme.js ../profile-repo/README.md out/all-blogs-index.json https://github.com/Avinashgurugubelli/avi-tech-blogs/blob/main/src/
         env:
           NODE_ENV: production
 
