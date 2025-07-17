@@ -3,10 +3,11 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { log, logLevels } = require('./logger');
 const { getBlogsOrder, renderDir } = require('./lib/readme-utils');
+const appConstants = require('./constants');
 
 // Paths
-const indexPath = path.join(__dirname, '..', 'out', 'full-content-index.json');
-const targetRepoPath = path.join(__dirname, '..', 'avinashgurugubelli');
+const indexPath = path.join(__dirname, '..', 'out', appConstants.FULL_CONTENT_INDEX_FILE_NAME);
+const targetRepoPath = path.join(__dirname, '..', 'profile-repo');
 const targetReadme = path.join(targetRepoPath, 'README.md');
 
 // Blog link prefix (used to generate correct GitHub links)
