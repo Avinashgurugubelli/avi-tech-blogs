@@ -4,30 +4,33 @@ const appConstants = require('../constants');
 const { log, logLevels } = require('../logger');
 
 function getBlogsOrder() {
-    const blogsInfoPath = path.join(process.cwd(), 'src', 'blogs', 'info.json');
+    const blogsIndexPath = path.join(process.cwd(), 'out', 'all-blogs-index.json');
 
     let blogsOrder = [];
 
-    if (fs.existsSync(blogsInfoPath)) {
+    if (fs.existsSync(blogsIndexPath)) {
         try {
-            const blogsInfo = JSON.parse(fs.readFileSync(blogsInfoPath, 'utf-8'));
-            if (Array.isArray(blogsInfo.blogsOrder)) {
-                blogsOrder = blogsInfo.blogsOrder.map(name => name.toLowerCase());
-                log(logLevels.info, `Using blogsOrder from info.json: ${blogsOrder.join(', ')}`);
+            const blogsIndex = JSON.parse(fs.readFileSync(blogsIndexPath, 'utf-8'));
+            if (Array.isArray(blogsIndex.children)) {
+                blogsOrder = blogsIndex.children
+                    .map(child => child.id || child.label)
+                    .filter(Boolean)
+                    .map(name => name.toLowerCase());
+
+                log(logLevels.info, `Using blogsOrder from all-blogs-index.json: ${blogsOrder.join(', ')}`);
             }
         } catch (e) {
-            log(logLevels.warn, `Could not parse blogsOrder from info.json: ${e.message}`);
+            log(logLevels.warn, `Could not parse blogsOrder from all-blogs-index.json: ${e.message}`);
         }
-    }
-
-    else {
-        log(logLevels.warn, `src/blogs/info.json not found or invalid. Using default blogsOrder.`);
+    } else {
+        log(logLevels.warn, `out/all-blogs-index.json not found. Using default blogsOrder.`);
     }
 
     return blogsOrder.length
         ? blogsOrder
         : ['oops', 'solid-principles', 'design-patterns', 'system-design'];
 }
+
 
 function sortChildrenByOrder(children, order) {
     const orderMap = new Map(order.map((name, index) => [name.toLowerCase(), index]));
