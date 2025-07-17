@@ -1,73 +1,46 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-const { log, logLevels } = require('./logger');
-const { getBlogsOrder, renderDir } = require('./lib/readme-utils');
-const appConstants = require('./constants');
+// scripts/update-git-overview-readme.js
+const fs = require("fs");
+const path = require("path");
 
-// Paths
-const indexPath = path.join(__dirname, '..', 'out', appConstants.FULL_CONTENT_INDEX_FILE_NAME);
-const targetRepoPath = path.join(__dirname, '..', 'profile-repo');
-const targetReadme = path.join(targetRepoPath, 'README.md');
+const readmePath = process.argv[2]; // ../profile-repo/README.md
+const infoJsonPath = process.argv[3]; // src/blogs/info.json
 
-// Blog link prefix (used to generate correct GitHub links)
-const linkPrefix = 'https://github.com/Avinashgurugubelli/avi-tech-blogs/blob/main/src/';
+function formatBlogList(blogs) {
+  return blogs.map(blog => `- [${blog.title}](${blog.url})`).join("\n");
+}
 
-/**
- * Injects the blog section into README.md between <!-- START BLOGS --> and <!-- END BLOGS -->
- */
-function injectBlogSection(readmePath, newContent) {
-  const original = fs.readFileSync(readmePath, 'utf-8');
-  const replaced = original.replace(
-    /<!-- START BLOGS -->[\s\S]*<!-- END BLOGS -->/,
-    `<!-- START BLOGS -->\n${newContent.trim()}\n<!-- END BLOGS -->`
+function updateReadme(readmeContent, blogListMarkdown) {
+  const startMarker = "<!-- START BLOGS -->";
+  const endMarker = "<!-- END BLOGS -->";
+
+  const startIndex = readmeContent.indexOf(startMarker);
+  const endIndex = readmeContent.indexOf(endMarker);
+
+  if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
+    throw new Error("Markers not found or in wrong order in README.md");
+  }
+
+  return (
+    readmeContent.slice(0, startIndex + startMarker.length) +
+    "\n" +
+    blogListMarkdown +
+    "\n" +
+    readmeContent.slice(endIndex)
   );
-  fs.writeFileSync(readmePath, replaced, 'utf-8');
-  log(logLevels.success, `✅ Updated blog section in ${readmePath}`);
 }
 
-/**
- * Commits and pushes the updated README.md to the avinashgurugubelli repo
- */
-function commitAndPushUpdate() {
-  try {
-    execSync('git config --global user.name "github-actions[bot]"');
-    execSync('git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"');
-
-    execSync(`git add README.md`, { cwd: targetRepoPath });
-    execSync(`git commit -m "chore: auto-update blog list in README.md"`, { cwd: targetRepoPath });
-    execSync(`git push origin main`, { cwd: targetRepoPath });
-
-    log(logLevels.success, `✅ Committed and pushed updated README.md to avinashgurugubelli repo`);
-  } catch (error) {
-    log(logLevels.error, `❌ Failed to commit or push changes: ${error.message}`);
-  }
-}
-
-/**
- * Main logic:
- * - Parses the full content index
- * - Renders it using your blog tree
- * - Replaces the blog section in the README
- * - Pushes the change to the overview repo
- */
 function main() {
-  const index = JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
-  const blogsOrder = getBlogsOrder();
+  console.log("🚀 Starting README blog section update...");
 
-  let root = index;
-  if (
-    Array.isArray(index.children) &&
-    index.children.length === 1 &&
-    index.children[0].label === 'blogs'
-  ) {
-    root = index.children[0];
-  }
+  const infoJson = JSON.parse(fs.readFileSync(infoJsonPath, "utf-8"));
+  const blogMarkdown = formatBlogList(infoJson.blogs);
 
-  const blogContent = renderDir(root, 0, linkPrefix, blogsOrder);
-  injectBlogSection(targetReadme, blogContent);
-  commitAndPushUpdate();
+  let readme = fs.readFileSync(readmePath, "utf-8");
+  readme = updateReadme(readme, blogMarkdown);
+
+  fs.writeFileSync(readmePath, readme, "utf-8");
+
+  console.log("✅ README.md updated successfully.");
 }
 
-log(logLevels.info, `🚀 Starting README blog section update...`);
 main();
