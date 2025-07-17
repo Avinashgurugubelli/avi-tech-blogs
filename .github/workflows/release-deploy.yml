@@ -1,25 +1,20 @@
-name: Build and Publish Markdown
+name: 🚀 Sync Blog to Profile README
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
-      - 'package.json'
-      - 'blogs/**'
-      - 'scripts/**'
-      - 'webpack.config.js'
-      - 'src/**'
-
-permissions:
-  contents: write  # Required for creating GitHub Releases
+      - "src/blogs/**"
+      - "scripts/update-git-overview-readme.js"
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Blog Repo
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -27,46 +22,33 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Generating the blogs build (Markdown + Webpack)
-        run: npm run generate:bundle
+      - name: Generate blog output
+        run: npm run build:blogs
 
-      - name: Get version from package.json
+      - name: Create version output (optional)
         id: version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+        run: echo "version=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
 
-      - name: Create ZIP of blog output
+      - name: Zip the blog output
         run: |
-          zip -r blog-artifacts-v${{ steps.version.outputs.version }}.zip ./out
+          mkdir -p zipped
+          zip -r zipped/out.zip out
 
-      - name: Upload ZIP as build artifact (optional)
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: avi-blogs-v${{ steps.version.outputs.version }}
-          path: blog-artifacts-v${{ steps.version.outputs.version }}.zip
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ steps.version.outputs.version }}
-          name: Release v${{ steps.version.outputs.version }}
-          body: |
-            Auto-generated release for blog version v${{ steps.version.outputs.version }}
-          files: blog-artifacts-v${{ steps.version.outputs.version }}.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: out-zip
+          path: zipped/out.zip
 
   sync-readme-to-profile:
-    name: Sync README to Profile Repo
+    needs: build
     runs-on: ubuntu-latest
-    needs: build  # Wait for blog build
 
     steps:
-      - name: Checkout this (avi-tech-blogs) repo
+      - name: Checkout Blog Repo
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -74,28 +56,28 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install deps for sync script
-        run: npm ci
+      - name: Download blog artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: out-zip
+          path: ./out-zip
 
-      - name: Clone profile repo (avinashgurugubelli)
+      - name: Unzip blog artifact
+        run: |
+          unzip -o ./out-zip/out.zip -d ./out
+
+      - name: Clone Profile Repo
         run: |
           git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/Avinashgurugubelli/avinashgurugubelli.git ../profile-repo
-          ls ../profile-repo
 
-      - name: Run script to update README
+      - name: Run README Update Script
+        run: node scripts/update-git-overview-readme.js
+
+      - name: Commit & Push to Profile Repo
         run: |
-          node scripts/update-git-overview-readme.js
-        env:
-          NODE_ENV: production
-
-      - name: Commit & Push to profile repo
-        working-directory: ../profile-repo
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-
+          cd ../profile-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git diff --quiet && git diff --staged --quiet || git commit -m "🔄 Auto-sync blog section from avi-tech-blogs"
-          git push origin main
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+          git commit -m "📝 Update blog section from avi-tech-blogs v${{ needs.build.outputs.version }}" || echo "No changes to commit"
+          git push
