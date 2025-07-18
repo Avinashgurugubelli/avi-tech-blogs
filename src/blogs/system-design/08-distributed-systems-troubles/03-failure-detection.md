@@ -1,3 +1,24 @@
+<!--
+This file is part of the Avi Tech Blogs repository.
+Author: Avinash Gurugubelli
+Title: Failure Detection in Distributed Systems: Techniques and Challenges",
+Description: "A comprehensive guide to understanding failure detection in distributed systems, including methods, challenges, and practical solutions.",
+Tags: [
+  "Distributed Systems",
+  "Failure Detection",
+  "Network Issues",
+  "Fault Tolerance",
+  "System Design"
+],
+References: [{
+  title: "Designing Data-Intensive Applications",
+  authors: ["Martin Kleppmann"],
+  publisher: "O'Reilly Media",
+  year: 2017,
+  url: "https://dataintensive.net/"
+}]
+-->
+
 # Methods to Detect Failures in Distributed Systems
 
 ## 1. TCP/IP-Level Signals (Best Effort)

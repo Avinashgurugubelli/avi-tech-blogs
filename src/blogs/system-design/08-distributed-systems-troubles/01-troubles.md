@@ -52,10 +52,19 @@ graph TD
 ```
 Diagram: Network partition causes two parts of a cluster to become isolated—each may believe they are still operating normally.
 
+Solution: Use consensus algorithms like Paxos or Raft to ensure that only one leader is elected, even in the presence of network partitions.
+
 ### 2. Unreliable Networks
 Key idea: Networks can be unreliable, leading to message loss, duplication, or reordering.
 This can cause inconsistencies in data and complicate communication between distributed components.
 
+
+Networks face variable delays due to:
+- Queueing: Packets wait in buffers at switches/OS.
+- TCP Retransmissions: Lost packets add latency.
+- Dynamic Bandwidth Sharing: Bursty traffic competes for resources.
+- Congestion Control: TCP adjusts rates based on perceived network conditions.
+- Network Partitioning: Physical or logical separation of nodes can lead to communication breakdowns.
 ```mermaid
 graph TD
     subgraph "Client Interaction"
@@ -95,3 +104,37 @@ graph TD
     B --> C
     C --> Q
 ```
+
+Diagram: Network issues can lead to message loss, duplication, and reordering, causing inconsistencies in distributed systems.
+
+Solution: Use techniques like:
+- **Quorum reads/writes**: Require a majority of nodes to agree on data.
+- **Read repair**: Fix inconsistencies during reads.
+- **Merkle trees**: Efficiently verify data integrity across nodes. 
+- **Blockchain consensus**: Ensure all nodes agree on the same state.
+- **Lease renewals**: Prevent stale leadership by requiring periodic updates.
+- **Heartbeat patterns**: Regularly check node liveness.
+- **Phi-accrual detection**: Dynamically adjust failure detection based on observed latencies.
+- 
+### 3. Timeouts
+
+Problem: Choosing timeout values is a fundamental challenge in fault detection.
+Why?
+
+- Long timeouts delay failure recovery (users wait unnecessarily).
+- Short timeouts cause false positives (nodes declared dead prematurely).
+
+```mermaid
+graph TD
+    A[Timeout Set] --> B{Too Long?}
+    A --> C{Too Short?}
+    B --> D[Slow Failure Detection]
+    C --> E[False Positives]
+    D --> F[Cascading Failures]
+    E --> G[Duplicate Actions]
+```
+### Solution: 
+ - Use adaptive timeouts based on recent latency patterns, exponential backoff, and retries before declaring a node dead.
+
+ - Algorithms like **Phi-accrual failure detection** can help balance these trade-offs by dynamically adjusting timeout thresholds based on observed latencies.
+  
