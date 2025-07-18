@@ -1,0 +1,10 @@
+{
+    "title": "The Troubles of Distributed Systems",
+    "description": "This blog discusses the common challenges faced in distributed systems, including network issues, data consistency, and fault tolerance.",
+    "author": "Avinash Gurugubelli",
+    "references": [{
+        "title": "Designing Data-Intensive Applications",
+        "author": "Martin Kleppmann",
+        "link": ""
+    }]
+}
