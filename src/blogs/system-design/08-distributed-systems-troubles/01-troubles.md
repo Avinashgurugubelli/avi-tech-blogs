@@ -58,28 +58,40 @@ This can cause inconsistencies in data and complicate communication between dist
 
 ```mermaid
 graph TD
-    A[Client] -->|Send Request| B[Node 1]
-    B -->|Process Request| C[Network]
-    C -->|Possible Issues| D[Node 2]
-    
-    subgraph Network Problems
-    C --> E[Message Lost]
-    C --> F[Message Delayed]
-    C --> G[Message Duplicated]
-    C --> H[Message Reordered]
+    subgraph "Client Interaction"
+    A[Client Request] --> B[Node 1]
+    Q[Node 2] --> R[Client Response]
     end
     
-    D -->|Response| A
-    
-    subgraph Consequences
-    I[Inconsistent Data]
-    J[Duplicate Processing]
-    K[Race Conditions]
-    L[Timeout Errors]
+    subgraph "Network Issues"
+    C[Network Transport]
+    C --> D["Message Loss<br>• Router drops packets<br>• NIC failures<br>• Process crashes"]
+    C --> E["Network Delays<br>• Queue buildup<br>• Buffer bloat<br>• Congestion"]
+    C --> F["Duplicate Messages<br>• TCP retransmission<br>• Producer retries<br>• Routing loops"]
+    C --> G["Out-of-Order Delivery<br>• Multi-path routing<br>• Variable latency<br>• Packet prioritization"]
     end
     
-    E --> I
-    F --> L
-    G --> J
-    H --> K
+    subgraph "System Impacts"
+    D --> H["DATA INCONSISTENCY<br>• Divergent replicas<br>• Lost writes<br>• Stale reads<br>• Ledger forks"]
+    E --> I["FAULT DETECTION ERRORS<br>• False leader elections<br>• Zombie processes<br>• Wasted resources<br>• Ledger sync failures"]
+    F --> J["DUPLICATE EFFECTS<br>• Double charging<br>• Repeated jobs<br>• Incorrect counts<br>• Duplicate ledger entries"]
+    G --> K["LOGICAL ERRORS<br>• Race conditions<br>• Deadlocks<br>• State corruption<br>• Ledger inconsistencies"]
+    end
+    
+    subgraph "Mitigation Techniques"
+    H --> L["CONSISTENCY MECHANISMS<br>• Quorum operations<br>• Read repair<br>• Merkle trees<br>• Blockchain consensus"]
+    I --> M["LIVENESS PROTECTION<br>• Lease renewals<br>• Heartbeat patterns<br>• Phi-accrual detection<br>• Ledger checkpointing"]
+    J --> N["IDEMPOTENCY CONTROLS<br>• Deduplication windows<br>• Exactly-once semantics<br>• Idempotency keys<br>• Transaction nonces"]
+    K --> O["ORDERING GUARANTEES<br>• Version vectors<br>• Lamport clocks<br>• Sequence numbers<br>• Cryptographic hashing"]
+    end
+    
+    subgraph "Ledger-Specific Protections"
+    L --> P["LEDGER INTEGRITY<br>• Proof-of-work/stake<br>• Byzantine fault tolerance<br>• Immutable append-log<br>• Digital signatures"]
+    M --> P
+    N --> P
+    O --> P
+    end
+    
+    B --> C
+    C --> Q
 ```
