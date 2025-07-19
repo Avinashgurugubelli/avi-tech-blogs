@@ -75,3 +75,11 @@
 - [Common Concurrency Issues in Database Transactions](src/blogs/system-design/07-transactions/03-concurrency-issues.md)
 - [Serializability in Databases](src/blogs/system-design/07-transactions/04-serializability.md)
 - [Pessimistic vs Optimistic Concurrency Control](src/blogs/system-design/07-transactions/05-pessimistic-optimistic-cc.md)
+
+
+### The Troubles of Distributed Systems
+
+- [The Troubles of Distributed Systems](src/blogs/system-design/08-distributed-systems-troubles/01-troubles.md)
+- [Troubles with Clocks in Distributed Systems](src/blogs/system-design/08-distributed-systems-troubles/02-troubles-with-clocks.md)
+- [Truth, Trust, and Correctness in Distributed Systems](src/blogs/system-design/08-distributed-systems-troubles/03-truth-and-trust-in-ds.md)
+- [Designing Data-Intensive Applications](src/blogs/system-design/08-distributed-systems-troubles/04-failure-detection.md)
