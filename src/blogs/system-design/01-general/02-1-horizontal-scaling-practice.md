@@ -174,5 +174,3 @@ services:
 
 ---
 
-*Ready to generate hands-on Docker Compose files if you want to try any specific cluster setup!*
-

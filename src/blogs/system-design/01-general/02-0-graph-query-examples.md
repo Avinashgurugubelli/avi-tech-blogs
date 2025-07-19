@@ -111,5 +111,3 @@ WHERE {
 | **Use Case Fit**       | Transactional, structured data       | Graph traversal-heavy (social, fraud, etc.) | Semantic Web, linked data, reasoning        |
 
 ---
-
-*Let me know if you want sample datasets or practice exercises for these!*
