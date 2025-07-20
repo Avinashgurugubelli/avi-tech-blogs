@@ -32,6 +32,7 @@
 - [🧬 How MVCC Tracks Row Versions Internally](src/blogs/system-design/01-general/01-mvcc.md)
 - [Sample Query Comparison: SQL, CQL (Cypher), SPARQL](src/blogs/system-design/01-general/02-0-graph-query-examples.md)
 - [Horizontal Scaling Practice Guide](src/blogs/system-design/01-general/02-1-horizontal-scaling-practice.md)
+- [Distributed Consistency Models: Tradeoffs, Use Cases, and Suitable Databases](src/blogs/system-design/01-general/ds-consistancy-tradeoffs.md)
 - [Predicate Locks vs Index Range Locks — Comparison & Use Cases](src/blogs/system-design/01-general/predicate-and-index-range-locks.md)
 - [Read Committed Isolation Level: Implementation Details](src/blogs/system-design/01-general/read-commit-isolation.md)
 - [VoltDB: High-Performance In-Memory Distributed SQL Database](src/blogs/system-design/01-general/vold-db.md)
