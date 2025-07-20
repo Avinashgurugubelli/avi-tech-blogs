@@ -15,8 +15,9 @@ function log(level, ...args) {
     debug: '\x1b[35m[DEBUG]\x1b[0m'
   };
   const prefix = logLevelsMap[level] || '[LOG]';
+   const timestamp = new Date().toISOString();
   // eslint-disable-next-line no-console
-  console.log(prefix, ...args);
+  console.log(`[${timestamp}] ${prefix}`, ...args);
 }
 
 module.exports = { log, logLevels};

@@ -9,7 +9,8 @@
     "generate:readme": "node scripts/readme-generator.js",
     "remove:metadata": "node scripts/remove-md-meta.js out/blogs",
     "generate:bundle": "npm run build && npm run generate-blogs-index  && npm run generate-blogs-root-index && npm run remove:metadata && npm run generate:readme ",
-    "update-src-readme": "node scripts/readme-generator.js out/all-blogs-index.json readme.md src/"
+    "update-src-readme": "node scripts/readme-generator.js out/all-blogs-index.json readme.md src/",
+    "generate-pdfs": "node scripts/md-to-pdf-batch.js"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^13.0.0",
@@ -26,6 +27,12 @@
   },
   "dependencies": {
     "fs-extra": "^11.3.0",
-    "json5": "^2.2.3"
+    "json5": "^2.2.3",
+    "markdown-it": "^14.1.0",
+    "markdown-it-mermaid-plugin": "^0.1.0",
+    "markdown-it-toc-done-right": "^4.2.0",
+    "markdown-pdf": "^11.0.0",
+    "pdf-merger-js": "^5.1.2",
+    "puppeteer": "^24.14.0"
   }
 }
