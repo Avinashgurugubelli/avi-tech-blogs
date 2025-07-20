@@ -75,6 +75,7 @@
 - [Common Concurrency Issues in Database Transactions](src/blogs/system-design/07-transactions/03-concurrency-issues.md)
 - [Serializability in Databases](src/blogs/system-design/07-transactions/04-serializability.md)
 - [Pessimistic vs Optimistic Concurrency Control](src/blogs/system-design/07-transactions/05-pessimistic-optimistic-cc.md)
+- [06-transactions-in-distributed-context.md](src/blogs/system-design/07-transactions/06-transactions-in-distributed-context.md)
 
 
 ### The Troubles of Distributed Systems
@@ -89,3 +90,4 @@
 
 - [Consistency and Consensus](src/blogs/system-design/09-consistency-and-consensus/01-cc-intro.md)
 - [Linearizability in Distributed Systems](src/blogs/system-design/09-consistency-and-consensus/02-linearizability.md)
+- [Linearizability vs. Serializability: What Every Developer Should Know](src/blogs/system-design/09-consistency-and-consensus/03-linearization-vs-serialization.md)

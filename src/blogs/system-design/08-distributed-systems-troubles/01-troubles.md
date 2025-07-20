@@ -7,7 +7,8 @@ tags: [
   "Network Issues",
   "Data Consistency",
   "Fault Tolerance",
-  "System Design"
+  "System Design",
+  "Network Partitioning
 ],
 references: [{
   title: "Designing Data-Intensive Applications",
@@ -138,3 +139,76 @@ graph TD
 
  - Algorithms like **Phi-accrual failure detection** can help balance these trade-offs by dynamically adjusting timeout thresholds based on observed latencies.
   
+---
+### What is a Network Partition?
+A network partition (also called a "split-brain" scenario) occurs when a distributed system's nodes (servers/replicas) lose communication with each other due to a network failure. This creates isolated subgroups that cannot exchange data, leading to potential inconsistencies.
+
+### How Network Partitions Happen
+- Network cable failures
+- Router/switch crashes
+- Internet outages between data centers
+- Firewall misconfigurations
+- Cloud provider failures (e.g., AWS AZ outage)
+
+````mermaid
+sequenceDiagram
+    participant Client1
+    participant Client2
+    participant US
+    participant EU
+    participant AS
+    
+    Note over US,EU: NETWORK PARTITION (US & EU cannot communicate)
+    
+    Client1->>US: Book seat 12A
+    US->>AS: Sync update (works)
+    US-->>Client1: "Booked!" (but EU never got the update)
+    
+    Client2->>EU: Is seat 12A available?
+    EU-->>Client2: "Yes" (STALE DATA, because partition prevents sync)
+    Client2->>EU: Book seat 12A
+    EU-->>Client2: "Booked!" (CONFLICT: 12A now double-booked)
+````
+
+
+### How Systems Handle Partitions (Solution)
+
+  - ### 1. CAP Theorem Trade-offs
+      When a network partition occurs, systems must make trade-offs between consistency, availability, and partition tolerance. There are two common approaches:
+
+      ### CP (Consistency + Partition Tolerance)
+      * Reject writes during partitions to ensure consistency
+      * Example: ZooKeeper
+
+      ### AP (Availability + Partition Tolerance)
+
+      * Allow writes but risk inconsistency
+      * Example: Cassandra
+
+  - ### 2. Recovery After Partition Heals
+    When a partition heals, systems must recover from any conflicts that may have arisen. Two common techniques are:
+
+    ### Conflict Resolution
+    * "Last write wins" approach
+    * Manual merge of conflicting data
+
+    ### Rollback of Conflicting Transactions
+    * Roll back transactions that conflicted during the partition
+
+  ### Prevention Techniques
+  To prevent partitions from causing issues, systems can use:
+
+  - ### Quorum Systems
+    * Require majority agreement among nodes before making decisions
+    * Prevents split-brain scenarios
+  - ### Leases/Heartbeats
+    * Detect failures faster by requiring nodes to send periodic heartbeats
+    * Allows for quicker recovery from partitions
+
+  ## Key Takeaways
+  ----------------
+
+  * Network partitions break communication between nodes
+  * Can cause data inconsistency (split-brain)
+  * Handled via CAP trade-offs (CP vs. AP)
+  * Strict serializability prevents conflicts but may sacrifice availability
