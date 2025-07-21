@@ -166,7 +166,7 @@ async function collectMarkdownFiles(node) {
 }
 
 
-async function processFilesInParallel(files, merger, concurrency = 4) {
+async function processFilesInParallel(files, merger, concurrency = 4, doFreshBuild = false) {
   const chunkArray = (arr, size) => {
     const chunks = [];
     for (let i = 0; i < arr.length; i += size) {
@@ -175,66 +175,86 @@ async function processFilesInParallel(files, merger, concurrency = 4) {
     return chunks;
   };
 
+  const oldChecksums = loadChecksums();
+  const newChecksums = {};
 
   const chunks = chunkArray(files, concurrency);
-
 
   log(logLevels.info, `Processing ${files.length} files in ${chunks.length} parallel chunks.`);
   for (const [chunkIndex, chunk] of chunks.entries()) {
     log(logLevels.info, `Processing chunk ${chunkIndex+1} with ${chunk.length} files.`);
+
     await Promise.all(chunk.map(async (fileNode) => {
-      const mdPath = path.join(BLOGS_ROOT, fileNode.path.replace(/^blogs\//, ''));
-      const pdfPath = path.join(PDF_ROOT, fileNode.path.replace(/^blogs\//, '').replace(/\.md$/, '.pdf'));
+      const relativePath = fileNode.path.replace(/^blogs\//, '');
+      const mdPath = path.join(BLOGS_ROOT, relativePath);
+      const pdfPath = path.join(PDF_ROOT, relativePath.replace(/\.md$/, '.pdf'));
       ensureDirSync(path.dirname(pdfPath));
-      if (fs.existsSync(mdPath)) {
-        log(logLevels.info, `⏳ Generating PDF: ${mdPath}`);
-        try {
-          await convertMarkdownToPDF(mdPath, pdfPath);
-          log(logLevels.success, `✅ PDF created: ${pdfPath}`);
-          merger.add(pdfPath);
-        } catch (err) {
-          log(logLevels.error, `❌ Failed: ${mdPath} -> ${pdfPath}: ${err.message}`);
-        }
-      } else {
+
+      if (!fs.existsSync(mdPath)) {
         log(logLevels.warn, `⚠️ Missing file: ${mdPath}`);
+        return;
+      }
+
+      const checksum = calculateChecksum(mdPath);
+      newChecksums[relativePath] = checksum;
+
+      const prevChecksum = oldChecksums[relativePath];
+
+      if (!doFreshBuild && prevChecksum === checksum && fs.existsSync(pdfPath)) {
+        log(logLevels.info, `✅ Skipped (unchanged): ${mdPath}`);
+        merger.add(pdfPath);
+        return;
+      }
+
+      log(logLevels.info, `⏳ Generating PDF: ${mdPath}`);
+      try {
+        await convertMarkdownToPDF(mdPath, pdfPath);
+        log(logLevels.success, `✅ PDF created: ${pdfPath}`);
+        merger.add(pdfPath);
+      } catch (err) {
+        log(logLevels.error, `❌ Failed: ${mdPath} -> ${pdfPath}: ${err.message}`);
       }
     }));
   }
+
+  saveChecksums(newChecksums);
 }
 
 
-async function main() {
-  log(logLevels.info, '🚀 Starting Blog PDF Generator (Parallel)');
-  cleanDirSync(PDF_ROOT);
-  ensureDirSync(PDF_ROOT);
 
+async function main() {
+  const doFreshBuild = process.argv.includes('doFreshBuild=true');
+
+  log(logLevels.info, `🚀 Starting Blog PDF Generator (Parallel)`);
+  if (doFreshBuild) {
+    log(logLevels.info, '🔁 Forcing full rebuild...');
+    cleanDirSync(PDF_ROOT);
+  }
+
+  ensureDirSync(PDF_ROOT);
 
   if (!fs.existsSync(INDEX_PATH)) {
     log(logLevels.error, `Missing index file: ${INDEX_PATH}`);
     process.exit(1);
   }
 
-
   const index = JSON.parse(fs.readFileSync(INDEX_PATH, 'utf-8'));
   const merger = new PDFMerger();
   const files = await collectMarkdownFiles(index);
-
 
   if (files.length === 0) {
     log(logLevels.warn, 'No markdown files found to process.');
     process.exit(0);
   }
 
-
-  await processFilesInParallel(files, merger, 4);
-
+  await processFilesInParallel(files, merger, 4, doFreshBuild);
 
   log(logLevels.info, '📚 Merging all generated PDFs...');
   await merger.save(MERGED_PDF_PATH);
 
-
   log(logLevels.success, `🎉 All blogs merged into: ${MERGED_PDF_PATH}`);
 }
+
 
 
 main().catch((err) => {

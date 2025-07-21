@@ -8,9 +8,14 @@
     "generate-blogs-root-index": "node scripts/blogs-root-index-generator.js",
     "generate:readme": "node scripts/readme-generator.js",
     "remove:metadata": "node scripts/remove-md-meta.js out/blogs",
-    "generate:bundle": "npm run build && npm run generate-blogs-index  && npm run generate-blogs-root-index && npm run remove:metadata && npm run generate:readme ",
+    "update-checksums": "node scripts/update-checksums.js",
+    "generate:bundle": "npm run build && npm run generate-blogs-index && npm run generate-blogs-root-index && npm run remove:metadata && npm run generate:readme",
+    "generate:local-bundle": "npm run generate:bundle && update-checksums && npm run update-src-readme && npm run generate-pdfs",
     "update-src-readme": "node scripts/readme-generator.js out/all-blogs-index.json readme.md src/",
-    "generate-pdfs": "node scripts/md-to-pdf-batch.js"
+    "generate-pdfs": "node scripts/md-to-pdf-batch.js",
+    "generate-pdfs:fresh": "node scripts/md-to-pdf-batch.js doFreshBuild=true",
+    "generate:bundle-with-pdfs": "npm run generate:bundle && npm run generate-pdfs",
+    "generate-bundle-pdfs:fresh": "npm run generate:bundle && npm run generate-pdfs:fresh"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^13.0.0",

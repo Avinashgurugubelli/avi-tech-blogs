@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const crypto = require('crypto');
 const CHECKSUM_FILE = path.join(process.cwd(), '.blog-checksum.json');
 

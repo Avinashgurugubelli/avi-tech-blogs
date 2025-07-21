@@ -164,6 +164,7 @@ function buildTree(dir, relPath = '') {
           type: 'file',
           sourcePath: appConstants.BLOG_FILE_SOURCE_BASE_PATH + entryRelPath.replace(/\\/g, '/'),
           path: path.join('blogs', entryRelPath).replace(/\\/g, '/'),
+          pdfPath: path.join('blogs-pdfs', entryRelPath.replace(/\.md$/, '.pdf')).replace(/\\/g, '/'),
           date: formatDate(stats.birthtime),
           createdOn: formatDateTime(stats.birthtime),
           ...meta
