@@ -6,6 +6,8 @@ const mermaidPlugin = require("markdown-it-mermaid-plugin");
 const tocPlugin = require("markdown-it-toc-done-right");
 const PDFMerger = require("pdf-merger-js").default;
 
+const {calculateChecksum, loadChecksums, saveChecksums} = require("./lib/utility");
+
 
 const { log, logLevels } = require("./logger"); // Replace or stub as needed
 
@@ -47,10 +49,10 @@ function cleanDirSync(dir) {
 // Embeds local images as base64, lets data URIs pass through
 function fixImagePaths(md, mdFilePath) {
   const dir = path.dirname(mdFilePath);
+
   return md.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, relPath) => {
     // Pass data URIs unmodified
     if (/^data:image\//.test(relPath)) return match;
-
 
     // Convert local files
     if (/^(?:\.\/|images\/|..\/)/.test(relPath)) {
@@ -58,25 +60,32 @@ function fixImagePaths(md, mdFilePath) {
         const absPath = path.resolve(dir, relPath);
         const ext = path.extname(absPath).toLowerCase();
         if (fs.existsSync(absPath) && ['.png', '.jpg', '.jpeg', '.gif', '.svg'].includes(ext)) {
-          const imageData = fs.readFileSync(absPath);
-          const base64 = imageData.toString('base64').replace(/\s+/g, '');
-          const mimeType = {
-            '.png': 'image/png',
-            '.jpg': 'image/jpeg',
-            '.jpeg': 'image/jpeg',
-            '.gif': 'image/gif',
-            '.svg': 'image/svg+xml'
-          }[ext] || 'application/octet-stream';
-          // Always keep all on one line, no extraneous whitespace
-          return `![${alt}](data:${mimeType};base64,${base64})`;
+          if (ext === '.svg') {
+            // Inline SVG as raw HTML
+            const svgContent = fs.readFileSync(absPath, 'utf8');
+            return `\n<div role="img" aria-label="${alt}">${svgContent}</div>\n`;
+          } else {
+            // Embed as base64 data URI for other image types
+            const imageData = fs.readFileSync(absPath);
+            const base64 = imageData.toString('base64').replace(/\s+/g, '');
+            const mimeType = {
+              '.png': 'image/png',
+              '.jpg': 'image/jpeg',
+              '.jpeg': 'image/jpeg',
+              '.gif': 'image/gif'
+            }[ext] || 'application/octet-stream';
+            return `![${alt}](data:${mimeType};base64,${base64})`;
+          }
         }
       } catch (err) {
         log(logLevels.warn, `Failed to embed image: ${relPath} - ${err.message}`);
       }
     }
+
     return match;
   });
 }
+
 
 
 async function convertMarkdownToPDF(mdPath, pdfPath) {
