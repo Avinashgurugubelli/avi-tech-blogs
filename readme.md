@@ -32,6 +32,7 @@
 - [🧬 How MVCC Tracks Row Versions Internally](src/blogs/system-design/01-general/01-mvcc.md)
 - [Sample Query Comparison: SQL, CQL (Cypher), SPARQL](src/blogs/system-design/01-general/02-0-graph-query-examples.md)
 - [Horizontal Scaling Practice Guide](src/blogs/system-design/01-general/02-1-horizontal-scaling-practice.md)
+- [db-ordering-mechanisms.md](src/blogs/system-design/01-general/db-ordering-mechanisms.md)
 - [Distributed Consistency Models: Tradeoffs, Use Cases, and Suitable Databases](src/blogs/system-design/01-general/ds-consistancy-tradeoffs.md)
 - [Predicate Locks vs Index Range Locks — Comparison & Use Cases](src/blogs/system-design/01-general/predicate-and-index-range-locks.md)
 - [Read Committed Isolation Level: Implementation Details](src/blogs/system-design/01-general/read-commit-isolation.md)
@@ -92,3 +93,5 @@
 - [Consistency and Consensus](src/blogs/system-design/09-consistency-and-consensus/01-cc-intro.md)
 - [Linearizability in Distributed Systems](src/blogs/system-design/09-consistency-and-consensus/02-linearizability.md)
 - [Linearizability vs. Serializability: What Every Developer Should Know](src/blogs/system-design/09-consistency-and-consensus/03-linearization-vs-serialization.md)
+- [04-ordering-guarantees.md](src/blogs/system-design/09-consistency-and-consensus/04-ordering-guarantees.md)
+- [05-linearizable-storage-tob.md](src/blogs/system-design/09-consistency-and-consensus/05-linearizable-storage-tob.md)
