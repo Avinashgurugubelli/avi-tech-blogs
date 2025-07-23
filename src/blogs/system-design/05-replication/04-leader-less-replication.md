@@ -13,7 +13,9 @@ tags: [
   "SystemDesign",
   "DatabaseConsistency",
   "ReplicationStrategies",
-  "HighAvailability"
+  "HighAvailability",
+  "Version Vectors",
+  "Quorum Based Consistency"
 ],
 references: [{
   title: "Designing Data-Intensive Applications",
@@ -186,15 +188,62 @@ To distinguish between **newer, older, and concurrent writes**, leaderless syste
         - **Concurrent Writes**: If versions conflict (e.g., `A:2` vs. `B:1`), they must be resolved (e.g., via last-write-wins, CRDTs, or application-level merging).  
 
     ### 🏆 Why Version Vectors Matter  
-        ✅ **Preserves Causality**: Ensures that if Write A happens before Write B, B’s version reflects that. 
+    - ✅ **Preserves Causality**: Ensures that if Write A happens before Write B, B’s version reflects that. 
 
-        ✅ **Detects Conflicts**: Instead of blindly overwriting, the system knows when concurrent writes need merging. 
+    - ✅ **Detects Conflicts**: Instead of blindly overwriting, the system knows when concurrent writes need merging. 
 
-        ✅ **Scalable & Decentralized**: No single bottleneck—each replica tracks its own updates.
+    - ✅ **Scalable & Decentralized**: No single bottleneck—each replica tracks its own updates.
 
     ### Example:
 
-    ![](../images/versionVectorExample.png) 
+    <!-- ![](../images/versionVectorExample.png)  -->
+
+    ```mermaid
+    sequenceDiagram
+    participant C1 as Client 1
+    participant A as Replica A
+    participant B as Replica B
+    participant C2 as Client 2
+
+    Note over A,B: Initial State: {"value": [], "version": {"A":0, "B":0}}
+
+    C1->>A: Add("milk")
+    A->>A: Increment version (A:0→1)
+    A-->>C1: {"value": ["milk"], "version": {"A":1, "B":0}}
+
+    C2->>B: Add("eggs") [Concurrent]
+    B->>B: Increment version (B:0→1)
+    B-->>C2: {"value": ["eggs"], "version": {"A":0, "B":1}}
+
+    Note over A,B: Conflict Detected: Concurrent versions exist
+
+    loop Background Sync Process
+        A->>B: Sync request with version {"A":1, "B":0}
+        B->>A: Send conflicting version {"A":0, "B":1}
+        A->>A: Detect conflict (no version dominates)
+        A->>B: Merge strategy: Union items ["milk", "eggs"]
+        B->>A: Acknowledge merge
+    end
+
+    Note over A,B: Post-Sync State: {"value": ["milk", "eggs"], "version": {"A":1, "B":1}}
+
+    C1->>A: Add("flour") [Sees merged state]
+    A->>A: Increment version (A:1→2)
+    A-->>C1: {"value": ["milk","eggs","flour"], "version": {"A":2, "B":1}}
+
+    C2->>B: Add("ham") [Sees merged state]
+    B->>B: Increment version (B:1→2)
+    B-->>C2: {"value": ["milk","eggs","ham"], "version": {"A":1, "B":2}}
+
+    loop Final Sync
+        A->>B: Sync version {"A":2, "B":1}
+        B->>A: Sync version {"A":1, "B":2}
+        A->>B: Merge to ["milk","eggs","flour","ham"]
+        B->>A: Update to version {"A":2, "B":2}
+    end
+
+    Note over A,B: Final State: {"value": ["milk","eggs","flour","ham"], "version": {"A":2, "B":2}}
+    ```
 
     ```
         1. 🛒 Version Vectors in Action: Shopping Cart Example
@@ -276,7 +325,7 @@ To distinguish between **newer, older, and concurrent writes**, leaderless syste
                 ]                
     ```
 
-    ### 🛠️ Resolution Strategies
+    ### 🛠️ Resolution Strategies (How Version Vectors Resolve Conflicts ?)
 
     | Strategy         | Result                         | Pros/Cons                     |
     |------------------|--------------------------------|-------------------------------|
