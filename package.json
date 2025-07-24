@@ -1,6 +1,6 @@
 {
   "name": "Avinash-Blogs",
-  "version": "2.3.7",
+  "version": "2.3.8",
   "scripts": {
     "prepare": "husky install",
     "build": "webpack --mode=production",
