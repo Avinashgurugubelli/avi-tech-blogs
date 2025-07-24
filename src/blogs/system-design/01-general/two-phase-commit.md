@@ -1,3 +1,15 @@
+<!--
+title: "Understanding Two-Phase Commit (2PC)",
+description: "A comprehensive guide to Two-Phase Commit (2PC) in distributed systems, explaining its phases, guarantees, and limitations.",
+tags: ["Distributed Systems", "Two-Phase Commit (2PC)", "Distributed Transactions", "System Design", "consensus"],
+author: "Avinash Gurugubelli",
+references: [{
+    "title": "Designing Data-Intensive Applications",
+    "author": "Martin Kleppmann",
+    "link": ""
+    }]
+--->
+
 # Understanding Two-Phase Commit (2PC): The Distributed Transaction Protocol
 
 ## What is Two-Phase Commit (2PC)?

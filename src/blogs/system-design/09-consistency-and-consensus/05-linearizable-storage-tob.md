@@ -1,3 +1,15 @@
+<!--
+ title: "Implementing Linearizable Storage with Total Order Broadcast",
+ description: "Learn how to build linearizable storage systems using total order broadcast, ensuring strong consistency and real-time operations.",
+ tags: ["Distributed Systems", "Linearizability", "Total Order Broadcast", "System Design", "consensus", "TOB"],
+ date: "2023-09-06",
+ author: "Avinash Gurugubelli",
+ references: [{
+    "title": "Designing Data-Intensive Applications",
+    "author": "Martin Kleppmann",
+    "link": ""
+}]
+-->
 # Implementing Linearizable Storage with Total Order Broadcast
 
 **Linearizability** and **total order broadcast** are two powerful, closely connected concepts in distributed systems. This guide explains how they relate, how one can be built from the other, and where their boundaries lie—using intuitive examples and step-by-step explanations.

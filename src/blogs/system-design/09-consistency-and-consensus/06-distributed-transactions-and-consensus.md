@@ -1,7 +1,18 @@
+<!--
+title: "Consensus in Distributed Systems",
+description: "A deep dive into the consensus problem in distributed systems, exploring leader election, atomic commit, and the FLP impossibility result.",
+tags: ["Distributed Systems", "Consensus", "    Leader Election", "Atomic Commit", "FLP Impossibility", "System Design"],
+author: "Avinash Gurugubelli",
+references: [{
+    "title": "Designing Data-Intensive Applications",
+    "author": "Martin Kleppmann",
+    "link": ""
+    }]
+--->
 
 # Consensus in Distributed Systems
 
-**Consensus** is one of the most fundamental problems in distributed computing. At its core, it’s about getting multiple nodes to **agree on a single decision**. 
+**Consensus** is one of the most fundamental problems in distributed computing. At its core, it’s about getting multiple nodes to **agree on a single decision**.
 
 While this may sound simple, many real-world systems have failed because they underestimated the difficulty of solving consensus reliably — especially in the presence of failures.
 
@@ -73,7 +84,7 @@ sequenceDiagram
     participant C as Coordinator
     participant P1 as Participant 1
     participant P2 as Participant 2
-    
+
     C->>P1: Prepare
     C->>P2: Prepare
     P1-->>C: Vote Yes/No
@@ -90,12 +101,14 @@ sequenceDiagram
 ### 🔄 The Two Phases
 
 #### Phase 1: Prepare
+
 - Coordinator asks all participants: “Can you commit?”
 - Each participant does necessary checks and replies:
   - `YES` → Ready to commit and promises to follow through
   - `NO` → Must abort
 
 #### Phase 2: Commit or Abort
+
 - If **all** vote `YES` → Coordinator sends **commit**
 - If **any** vote `NO` or a timeout occurs → Coordinator sends **abort**
 - Participants **must** obey the final decision
@@ -104,7 +117,8 @@ sequenceDiagram
 
 - ## ⚠️ Limitations of 2PC
 
-    While 2PC ensures atomicity, it has some serious drawbacks:
+  While 2PC ensures atomicity, it has some serious drawbacks:
+
   - **Blocking Problem:** If the **coordinator crashes** after participants vote `YES`, they’re stuck waiting forever — in an "in-doubt" state.
 
     ```mermaid
@@ -112,7 +126,7 @@ sequenceDiagram
     A[Coordinator Crash] -->|After YES votes| B["⏳ Participants Blocked"]
     B --> C["🚫 System Halted"]
     C --> D["👨💻 Admin Intervention"]
-    
+
     style A fill:#fff3f3,stroke:#ff6b6b
     style B fill:#fff8e8,stroke:#ffc107
     style C fill:#ffebee,stroke:#f44336
@@ -122,11 +136,12 @@ sequenceDiagram
   - **Performance Overhead:** Involves multiple network round-trips.
   - **Single Point of Failure:** The coordinator is a bottleneck and failure point.
 
- - ### Why 2PC Ensures Atomicity: A System of Promises
-  - You might wonder: if network failures, disk crashes, or message loss can occur at any time, how does 2PC actually guarantee atomic commit?
+- ### Why 2PC Ensures Atomicity: A System of Promises
+- You might wonder: if network failures, disk crashes, or message loss can occur at any time, how does 2PC actually guarantee atomic commit?
 
-  - The secret lies in a system of **irrevocable promises**, enforced through durable logging:
-  - For More Details, see the [Two-Phase Commit](../01-general/two-phase-commit.md) blog post.
+- The secret lies in a system of **irrevocable promises**, enforced through durable logging:
+- For More Details, see the [Two-Phase Commit](../01-general/two-phase-commit.md) blog post.
+
 ---
 
 ## ⏩ Three-Phase Commit (3PC)
@@ -138,6 +153,7 @@ sequenceDiagram
 3. **Do-Commit** (final confirmation)
 
 However, **3PC has limitations**:
+
 - Assumes **bounded network delays**
 - Assumes **bounded node response times**
 - Rarely used in practice due to complexity and fragility
@@ -170,4 +186,4 @@ These protocols solve **leader election**, **replication**, and **consistency** 
 
 - [Raft Illustrated](https://raft.github.io/)
 - [ZooKeeper Atomic Broadcast](https://zookeeper.apache.org/doc/current/zookeeperInternals.html#sc_zab)
-- *Designing Data-Intensive Applications* by Martin Kleppmann (Highly recommended!)
+- _Designing Data-Intensive Applications_ by Martin Kleppmann (Highly recommended!)

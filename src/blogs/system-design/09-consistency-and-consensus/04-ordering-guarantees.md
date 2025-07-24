@@ -1,6 +1,17 @@
+<!--
+title: "Understanding Ordering Guarantees in Distributed Systems",
+description: "A comprehensive guide to understanding the importance of ordering guarantees in distributed systems, including linearizability, causality, and partial order.",
+tags: ["Distributed Systems", "Consistency", "Linearizability", "Causality", "Partial Order", "System Design", "consensus", "ordering guarantees"],
+author: "Avinash Gurugubelli",
+references: [{
+    "title": "Designing Data-Intensive Applications",
+    "author": "Martin Kleppmann",
+    "link": ""
+}]
+--->
+
 # 📘 Understanding Ordering Guarantees in Distributed Systems
 
----
 
 ## ✨ Why Does “Ordering” Matter?
 

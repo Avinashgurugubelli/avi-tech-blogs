@@ -34,8 +34,11 @@
 - [Horizontal Scaling Practice Guide](src/blogs/system-design/01-general/02-1-horizontal-scaling-practice.md)
 - [db-ordering-mechanisms.md](src/blogs/system-design/01-general/db-ordering-mechanisms.md)
 - [Distributed Consistency Models: Tradeoffs, Use Cases, and Suitable Databases](src/blogs/system-design/01-general/ds-consistancy-tradeoffs.md)
+- [Epochs in Raft](src/blogs/system-design/01-general/epochs-in-distributed-consensus.md)
+- [Understanding Idempotency in System Design](src/blogs/system-design/01-general/idempotency.md)
 - [Predicate Locks vs Index Range Locks — Comparison & Use Cases](src/blogs/system-design/01-general/predicate-and-index-range-locks.md)
 - [Read Committed Isolation Level: Implementation Details](src/blogs/system-design/01-general/read-commit-isolation.md)
+- [Understanding Two-Phase Commit (2PC)](src/blogs/system-design/01-general/two-phase-commit.md)
 - [VoltDB: High-Performance In-Memory Distributed SQL Database](src/blogs/system-design/01-general/vold-db.md)
 
 
@@ -93,5 +96,7 @@
 - [Consistency and Consensus](src/blogs/system-design/09-consistency-and-consensus/01-cc-intro.md)
 - [Linearizability in Distributed Systems](src/blogs/system-design/09-consistency-and-consensus/02-linearizability.md)
 - [Linearizability vs. Serializability: What Every Developer Should Know](src/blogs/system-design/09-consistency-and-consensus/03-linearization-vs-serialization.md)
-- [04-ordering-guarantees.md](src/blogs/system-design/09-consistency-and-consensus/04-ordering-guarantees.md)
-- [05-linearizable-storage-tob.md](src/blogs/system-design/09-consistency-and-consensus/05-linearizable-storage-tob.md)
+- [Understanding Ordering Guarantees in Distributed Systems](src/blogs/system-design/09-consistency-and-consensus/04-ordering-guarantees.md)
+- [Implementing Linearizable Storage with Total Order Broadcast](src/blogs/system-design/09-consistency-and-consensus/05-linearizable-storage-tob.md)
+- [Consensus in Distributed Systems](src/blogs/system-design/09-consistency-and-consensus/06-distributed-transactions-and-consensus.md)
+- [Distributed Transactions and Fault-Tolerant Consensus in Practice](src/blogs/system-design/09-consistency-and-consensus/07-dt-ft-consensus-in-practice.md)
