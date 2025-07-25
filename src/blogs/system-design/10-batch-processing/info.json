@@ -1,0 +1,10 @@
+{
+    "title": "Batch Processing",
+    "description": "Understanding the batch processing in Databases and in Distributed systems.",
+    "author": "Avinash Gurugubelli",
+    "references": [{
+        "title": "Designing Data-Intensive Applications",
+        "author": "Martin Kleppmann",
+        "link": ""
+    }]
+}

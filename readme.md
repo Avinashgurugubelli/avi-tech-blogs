@@ -102,6 +102,6 @@
 - [Distributed Transactions and Fault-Tolerant Consensus in Practice](src/blogs/system-design/09-consistency-and-consensus/07-dt-ft-consensus-in-practice.md)
 
 
-### 10-batch-processing
+### Batch Processing
 
 - [Join Strategies in MapReduce](src/blogs/system-design/10-batch-processing/01-batch-processing.md)
