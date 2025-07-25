@@ -100,3 +100,8 @@
 - [Implementing Linearizable Storage with Total Order Broadcast](src/blogs/system-design/09-consistency-and-consensus/05-linearizable-storage-tob.md)
 - [Consensus in Distributed Systems](src/blogs/system-design/09-consistency-and-consensus/06-distributed-transactions-and-consensus.md)
 - [Distributed Transactions and Fault-Tolerant Consensus in Practice](src/blogs/system-design/09-consistency-and-consensus/07-dt-ft-consensus-in-practice.md)
+
+
+### 10-batch-processing
+
+- [Join Strategies in MapReduce](src/blogs/system-design/10-batch-processing/01-batch-processing.md)
