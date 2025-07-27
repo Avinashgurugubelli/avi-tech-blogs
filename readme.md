@@ -23,6 +23,49 @@
 - [Liskov Substitution Principle](src/blogs/solid-principles/06-liskov-substitution-principle.md)
 
 
+## Design Patterns
+
+- [01-design-patterns-introduction.md](src/blogs/design-patterns/01-design-patterns-introduction.md)
+
+### Behavioral Design Patterns
+
+- [Chain of Responsibility Design Pattern](src/blogs/design-patterns/behavioral/chain-of-responsibility-pattern.md)
+- [Command Design Pattern](src/blogs/design-patterns/behavioral/command-pattern.md)
+- [Mediator Design Pattern](src/blogs/design-patterns/behavioral/mediator-pattern.md)
+- [Memento Design Pattern](src/blogs/design-patterns/behavioral/memento-pattern.md)
+- [Observer Design Pattern](src/blogs/design-patterns/behavioral/observer-pattern.md)
+- [State Design Pattern](src/blogs/design-patterns/behavioral/state-pattern.md)
+- [Strategy Design Pattern](src/blogs/design-patterns/behavioral/strategy-pattern.md)
+- [Visitor Design Pattern](src/blogs/design-patterns/behavioral/visitor-pattern.md)
+
+
+### Creational Design Patterns
+
+- [Abstract Factory Design Pattern](src/blogs/design-patterns/creational/abstract-factory-pattern.md)
+- [Builder Design Pattern](src/blogs/design-patterns/creational/builder-pattern.md)
+- [Factory Design Pattern](src/blogs/design-patterns/creational/factory-pattern.md)
+- [Prototype Design Pattern](src/blogs/design-patterns/creational/prototype-pattern.md)
+- [Singleton Design Pattern — One Instance to Rule Them All](src/blogs/design-patterns/creational/singleton-pattern.md)
+
+- [Design Patterns in Object-Oriented Programming — A Complete Guide](src/blogs/design-patterns/design-patterns-intro.md)
+- [learning-order.md](src/blogs/design-patterns/learning-order.md)
+
+### resources
+
+
+
+### Structural Design Patterns
+
+- [Adapter Design Pattern](src/blogs/design-patterns/structural/adapter-pattern.md)
+- [Bridge Design Pattern — Decouple Abstraction from Implementation](src/blogs/design-patterns/structural/bridge-pattern.md)
+- [Composite Design Pattern](src/blogs/design-patterns/structural/composite-pattern.md)
+- [Decorator Design Pattern](src/blogs/design-patterns/structural/decorator-pattern.md)
+- [Facade Design Pattern — Simplifying Complex Systems with a Unified Interface](src/blogs/design-patterns/structural/facade-pattern.md)
+- [Flyweight Design Pattern](src/blogs/design-patterns/structural/flyweight-pattern.md)
+- [Proxy Design Pattern](src/blogs/design-patterns/structural/proxy-pattern.md)
+
+
+
 ## System Design
 
 
