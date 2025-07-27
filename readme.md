@@ -25,7 +25,11 @@
 
 ## Design Patterns
 
-- [01-design-patterns-introduction.md](src/blogs/design-patterns/01-design-patterns-introduction.md)
+
+### Design Patterns
+
+- [Design Patterns in Object-Oriented Programming — A Complete Guide](src/blogs/design-patterns/01-intro/design-patterns-intro.md)
+
 
 ### Behavioral Design Patterns
 
@@ -47,12 +51,7 @@
 - [Prototype Design Pattern](src/blogs/design-patterns/creational/prototype-pattern.md)
 - [Singleton Design Pattern — One Instance to Rule Them All](src/blogs/design-patterns/creational/singleton-pattern.md)
 
-- [Design Patterns in Object-Oriented Programming — A Complete Guide](src/blogs/design-patterns/design-patterns-intro.md)
-- [learning-order.md](src/blogs/design-patterns/learning-order.md)
-
-### resources
-
-
+- [design-patterns-intro.md](src/blogs/design-patterns/design-patterns-intro.md)
 
 ### Structural Design Patterns
 

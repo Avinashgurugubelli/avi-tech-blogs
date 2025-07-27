@@ -11,7 +11,7 @@ const OUTPUT_ROOT = process.argv[3] || INPUT_ROOT;
 
 // Config: folders to exclude (case-insensitive)
 const config = {
-  excludeFolders: ['images', '.git', 'node_modules'],
+  excludeFolders: ['images', '.git', 'node_modules', 'resources'],
   acceptExtensions: ['.md', '.json', '.txt', '.html'],
   excludeFiles: ['info.json']
 };
