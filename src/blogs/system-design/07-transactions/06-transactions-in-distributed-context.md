@@ -1,3 +1,9 @@
+<!-- 
+  title: "Transactions in Distributed Context",
+  description: "Understanding how transactions work in a distributed context, including serialization across partitions and replicas.",
+  tags: ["transactions", "distributed systems", "serialization"],
+  author: "Avinash Gurugubelli"
+-->
 
 # Transactions in Distributed Context
 

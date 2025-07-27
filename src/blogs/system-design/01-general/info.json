@@ -1,5 +1,5 @@
 {
-    "title": "General System Design Principles",
+    "title": "General",
     "description": "This blog post introduces the fundamental principles of system design, focusing on scalability, reliability, and maintainability. It provides an overview of key concepts and best practices for designing robust software systems.",
     "author": "Avinash Gurugubelli",
     "references": [{

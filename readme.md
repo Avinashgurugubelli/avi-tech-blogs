@@ -64,7 +64,7 @@
 - [Common Concurrency Issues in Database Transactions](src/blogs/system-design/07-transactions/03-concurrency-issues.md)
 - [Serializability in Databases](src/blogs/system-design/07-transactions/04-serializability.md)
 - [Pessimistic vs Optimistic Concurrency Control](src/blogs/system-design/07-transactions/05-pessimistic-optimistic-cc.md)
-- [06-transactions-in-distributed-context.md](src/blogs/system-design/07-transactions/06-transactions-in-distributed-context.md)
+- [Transactions in Distributed Context](src/blogs/system-design/07-transactions/06-transactions-in-distributed-context.md)
 
 
 ### The Troubles of Distributed Systems
@@ -95,7 +95,7 @@
 - [Graphs and Iterative Batch Processing](src/blogs/system-design/10-batch-processing/05-graphs-and-iterative-processing.md)
 
 
-### General System Design Principles
+### General
 
 - [Applications of Property Graphs vs Triple Stores (RDF)](src/blogs/system-design/01-general/01-0-graph-db-vs-triple-store-notes.md)
 - [🧬 How MVCC Tracks Row Versions Internally](src/blogs/system-design/01-general/01-mvcc.md)
