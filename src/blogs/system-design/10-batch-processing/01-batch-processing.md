@@ -195,63 +195,7 @@ flowchart TD
 Join Strategies in MapReduce
 ==========================
 
-### 1. Broadcast Hash Join
----
-**Best for:** Small datasets that fit in memory
-
-#### Diagram
-
-```mermaid
-graph TD
-    Small[Small Dataset] -->|Broadcast| M1[Mapper 1]
-    Small -->|Broadcast| M2[Mapper 2]
-    Large[Large Dataset] -->|Partitioned| M1
-    Large -->|Partitioned| M2
-    M1 -->|In-memory Join| O1[Output 1]
-    M2 -->|In-memory Join| O2[Output 2]
-```
-
-#### Characteristics
-
-* Entire small dataset loaded into each mapper's memory
-* Large dataset processed in parallel
-* No reducers needed
-* Simple but memory-intensive
-
-### 2. Partitioned Hash Join
----
-**Best for:** Large datasets with compatible partitioning
-
-#### Diagram
-
-```mermaid
-graph TD
-    A[Dataset A] -->|Partition 1| M1A[Mapper 1]
-    A -->|Partition 2| M2A[Mapper 2]
-    B[Dataset B] -->|Partition 1| M1B[Mapper 1]
-    B -->|Partition 2| M2B[Mapper 2]
-    M1A -->|Hash Table| H1[In-Memory Join]
-    M1B -->|Stream| H1
-    M2A -->|Hash Table| H2[In-Memory Join]
-    M2B -->|Stream| H2
-    H1 --> O1[Output 1]
-    H2 --> O2[Output 2]
-```
-
-#### Requirements
-
-* Both datasets must have:
-	+ Same number of partitions
-	+ Same partitioning function
-	+ Same partition keys
-
-#### Advantages
-
-* More memory efficient than broadcast
-* Scales to larger datasets
-* Still no reducer phase needed
-
-### 3. Map-Side Merge Join
+### 1. Map-Side Merge Join
 ---
 **Best for:** Pre-partitioned and pre-sorted datasets
 
@@ -273,6 +217,66 @@ graph TD
 * Performs merge operation (like mergesort)
 * Joins records when keys match
 * Most efficient but requires strict pre-processing
+
+### 2. Broadcast Hash Join
+---
+**Best for:** Small datasets that fit in memory
+
+- The Term Broadcast HASH: the word broadcast refers to the fact that each mapper for a partition of the large dataset is given a copy of the small dataset (i.e small dataset is broadcasted to all mappers) and the word hash refers to the fact that the small dataset uses hash table.
+
+#### Diagram
+
+```mermaid
+graph TD
+    Small[Small Dataset] -->|Broadcast| M1[Mapper 1]
+    Small -->|Broadcast| M2[Mapper 2]
+    Large[Large Dataset] -->|Partitioned| M1
+    Large -->|Partitioned| M2
+    M1 -->|In-memory Join| O1[Output 1]
+    M2 -->|In-memory Join| O2[Output 2]
+```
+
+#### Characteristics
+
+* Entire small dataset loaded into each mapper's memory
+* Large dataset processed in parallel
+* No reducers needed
+* Simple but memory-intensive
+
+### 3. Partitioned Hash Join
+---
+**Best for:** Large datasets with compatible partitioning
+
+#### Diagram
+
+```mermaid
+graph TD
+    A[Dataset A] -->|Partition 1| M1A[Mapper 1]
+    A -->|Partition 2| M2A[Mapper 2]
+    B[Dataset B] -->|Partition 1| M1B[Mapper 1]
+    B -->|Partition 2| M2B[Mapper 2]
+    M1A -->|Hash Table| H1[In-Memory Join]
+    M1B -->|Stream| H1
+    M2A -->|Hash Table| H2[In-Memory Join]
+    M2B -->|Stream| H2
+    H1 --> O1[Output 1]
+    H2 --> O2[Output 2]
+```
+- from the above example (user activity and user table example), we could arrange for the activity events and the user database to each be partitioned based on the last decimal digit of the user ID (so lets say there are 10 partitions on either side). For example, mapper 3 first loads all users with an ID ending in 3 into a hash table, and then scans over all the activity events for each user whose ID ends in 3.
+
+#### Requirements
+
+* Both datasets must have:
+	+ Same number of partitions
+	+ Same partitioning function
+	+ Same partition keys
+
+#### Advantages
+
+* More memory efficient than broadcast
+* Scales to larger datasets
+* Still no reducer phase needed
+
 
 Handling Data Skew
 -----------------

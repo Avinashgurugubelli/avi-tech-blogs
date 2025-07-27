@@ -1,3 +1,11 @@
+<!--
+author: "Avinash Gurugubelli",
+title: "Do Databases Like MySQL, PostgreSQL, MongoDB Choose These Ordering Mechanisms?",
+description: "A deep dive into how popular databases handle ordering and concurrency, including MySQL, PostgreSQL, MongoDB, Cassandra, Riak, DynamoDB, Spanner, Kafka, and more.",
+tags: ["Databases", "Ordering Mechanisms", "Concurrency", "CAP Theorem", "Consistency", "Availability", "Partition Tolerance", "Distributed Systems"],
+references: []
+-->
+
 # 🧠 Do Databases Like MySQL, PostgreSQL, MongoDB Choose These Ordering Mechanisms?
 
 Yes — but it depends on the system’s goals (e.g., consistency, availability, latency, distributed or not). Different databases use different ordering mechanisms based on:
