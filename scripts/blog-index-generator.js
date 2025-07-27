@@ -19,8 +19,8 @@ const config = {
 function formatDate(ts) {
   const date = new Date(ts);
   const months = [
-    'January','February','March','April','May','June',
-    'July','August','September','October','November','December'
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
   ];
   return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
@@ -171,7 +171,16 @@ function buildTree(dir, relPath = '') {
         };
       }
     });
-
+  // Sort children if blogsOrder is defined in info.json  
+  if (info.blogsOrder) {
+    children.sort((a, b) => {
+      const aIndex = info.blogsOrder.indexOf(a.label);
+      const bIndex = info.blogsOrder.indexOf(b.label);
+      if (aIndex === -1) return 1;
+      if (bIndex === -1) return -1;
+      return aIndex - bIndex;
+    });
+  }
   return {
     label: relPath ? path.basename(absDir) : 'blogs',
     type: 'directory',
@@ -239,5 +248,5 @@ function main() {
   log(logLevels.success, ` ******************* Blog index generation completed ******************`);
 }
 
-log(logLevels.info,`>>>>>> Started generating blogs index file >>>> `);
+log(logLevels.info, `>>>>>> Started generating blogs index file >>>> `);
 main();

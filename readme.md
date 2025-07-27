@@ -26,22 +26,6 @@
 ## System Design
 
 
-### General System Design Principles
-
-- [Applications of Property Graphs vs Triple Stores (RDF)](src/blogs/system-design/01-general/01-0-graph-db-vs-triple-store-notes.md)
-- [🧬 How MVCC Tracks Row Versions Internally](src/blogs/system-design/01-general/01-mvcc.md)
-- [Sample Query Comparison: SQL, CQL (Cypher), SPARQL](src/blogs/system-design/01-general/02-0-graph-query-examples.md)
-- [Horizontal Scaling Practice Guide](src/blogs/system-design/01-general/02-1-horizontal-scaling-practice.md)
-- [Do Databases Like MySQL, PostgreSQL, MongoDB Choose These Ordering Mechanisms?](src/blogs/system-design/01-general/db-ordering-mechanisms.md)
-- [Distributed Consistency Models: Tradeoffs, Use Cases, and Suitable Databases](src/blogs/system-design/01-general/ds-consistancy-tradeoffs.md)
-- [Epochs in Raft](src/blogs/system-design/01-general/epochs-in-distributed-consensus.md)
-- [Understanding Idempotency in System Design](src/blogs/system-design/01-general/idempotency.md)
-- [Predicate Locks vs Index Range Locks — Comparison & Use Cases](src/blogs/system-design/01-general/predicate-and-index-range-locks.md)
-- [Read Committed Isolation Level: Implementation Details](src/blogs/system-design/01-general/read-commit-isolation.md)
-- [Understanding Two-Phase Commit (2PC)](src/blogs/system-design/01-general/two-phase-commit.md)
-- [VoltDB: High-Performance In-Memory Distributed SQL Database](src/blogs/system-design/01-general/vold-db.md)
-
-
 ### Storage and Retrieval
 
 - [Storage and Retrieval Deep Dive](src/blogs/system-design/03-storage-and-retrival/03-0-storage-and-retrival.md)
@@ -109,3 +93,19 @@
 - [Comparing Hadoop to Distributed Databases](src/blogs/system-design/10-batch-processing/03-comparing-hadoop-to-mpp.md)
 - [Beyond MapReduce: Efficient Data Processing with Modern Engines](src/blogs/system-design/10-batch-processing/04-beyond-map-reduce.md)
 - [Graphs and Iterative Batch Processing](src/blogs/system-design/10-batch-processing/05-graphs-and-iterative-processing.md)
+
+
+### General System Design Principles
+
+- [Applications of Property Graphs vs Triple Stores (RDF)](src/blogs/system-design/01-general/01-0-graph-db-vs-triple-store-notes.md)
+- [🧬 How MVCC Tracks Row Versions Internally](src/blogs/system-design/01-general/01-mvcc.md)
+- [Sample Query Comparison: SQL, CQL (Cypher), SPARQL](src/blogs/system-design/01-general/02-0-graph-query-examples.md)
+- [Horizontal Scaling Practice Guide](src/blogs/system-design/01-general/02-1-horizontal-scaling-practice.md)
+- [Do Databases Like MySQL, PostgreSQL, MongoDB Choose These Ordering Mechanisms?](src/blogs/system-design/01-general/db-ordering-mechanisms.md)
+- [Distributed Consistency Models: Tradeoffs, Use Cases, and Suitable Databases](src/blogs/system-design/01-general/ds-consistancy-tradeoffs.md)
+- [Epochs in Raft](src/blogs/system-design/01-general/epochs-in-distributed-consensus.md)
+- [Understanding Idempotency in System Design](src/blogs/system-design/01-general/idempotency.md)
+- [Predicate Locks vs Index Range Locks — Comparison & Use Cases](src/blogs/system-design/01-general/predicate-and-index-range-locks.md)
+- [Read Committed Isolation Level: Implementation Details](src/blogs/system-design/01-general/read-commit-isolation.md)
+- [Understanding Two-Phase Commit (2PC)](src/blogs/system-design/01-general/two-phase-commit.md)
+- [VoltDB: High-Performance In-Memory Distributed SQL Database](src/blogs/system-design/01-general/vold-db.md)

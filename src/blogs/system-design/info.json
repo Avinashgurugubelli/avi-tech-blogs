@@ -6,5 +6,16 @@
         "title": "Designing Data-Intensive Applications",
         "author": "Martin Kleppmann",
         "link": ""
-    }]
+    }],
+    "blogsOrder": [
+        "03-storage-and-retrival",
+        "04-encoding-and-evolution",
+        "05-replication",
+        "06-partitioning",
+        "07-transactions",
+        "08-distributed-systems-troubles",
+        "09-consistency-and-consensus",
+        "10-batch-processing",
+        "01-general"
+    ]
 }
