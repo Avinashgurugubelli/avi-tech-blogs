@@ -9,6 +9,7 @@ references: [
 ]
 -->
 
+
 # Design Patterns
 
 ## Why do we need patterns?
@@ -33,11 +34,11 @@ Design patterns for object-oriented programs are divided into **three broad cate
 
 These patterns abstract the instantiation process, making a system independent of how its objects are created. Examples:
 
-- [Builder Pattern](./creational/builder-pattern.md)
-- [Prototype Pattern](./creational/prototype-pattern.md)
-- [Singleton Pattern](./creational/singleton-pattern.md)
-- [Factory Pattern](./creational/factory-pattern.md)
-- [Abstract Factory Pattern](./creational/abstract-factory-pattern.md)
+- [Builder Pattern](../creational/builder-pattern.md)
+- [Prototype Pattern](../creational/prototype-pattern.md)
+- [Singleton Pattern](../creational/singleton-pattern.md)
+- [Factory Pattern](../creational/factory-pattern.md)
+- [Abstract Factory Pattern](../creational/abstract-factory-pattern.md)
 
 ---
 
@@ -45,13 +46,13 @@ These patterns abstract the instantiation process, making a system independent o
 
 These patterns deal with class and object composition, forming larger structures while keeping them flexible. Examples:
 
-- [Adapter Pattern](./structural/adapter-pattern.md)
-- [Bridge Pattern](./structural/bridge-pattern.md)
-- [Composite Pattern](./structural/composite-pattern.md)
-- [Decorator Pattern](./structural/decorator-pattern.md)
-- [Facade Pattern](./structural/facade-pattern.md)
-- [Flyweight Pattern](./structural/flyweight-pattern.md)
-- [Proxy Pattern](./structural/proxy-pattern.md)
+- [Adapter Pattern](../structural/adapter-pattern.md)
+- [Bridge Pattern](../structural/bridge-pattern.md)
+- [Composite Pattern](../structural/composite-pattern.md)
+- [Decorator Pattern](../structural/decorator-pattern.md)
+- [Facade Pattern](../structural/facade-pattern.md)
+- [Flyweight Pattern](../structural/flyweight-pattern.md)
+- [Proxy Pattern](../structural/proxy-pattern.md)
 
 ---
 
@@ -59,17 +60,18 @@ These patterns deal with class and object composition, forming larger structures
 
 These focus on the communication between objects and how responsibilities are assigned. Examples:
 
-- [Chain of Responsibility Pattern](./behavioral/chain-of-responsibility-pattern.md)
-- [Command Pattern](./behavioral/command-pattern.md)
-- [Interpreter Pattern](./behavioral/interpreter-pattern.md)
-- [Iterator Pattern](./behavioral/iterator-pattern.md)
-- [Mediator Pattern](./behavioral/mediator-pattern.md)
-- [Memento Pattern](./behavioral/memento-pattern.md)
-- [Observer Pattern](./behavioral/observer-pattern.md)
-- [State Pattern](./behavioral/state-pattern.md)
-- [Strategy Pattern](./behavioral/strategy-pattern.md)
-- [Template Method Pattern](./behavioral/template-pattern.md)
-- [Visitor Pattern](./behavioral/visitor-pattern.md)
+
+- [Chain of Responsibility Pattern](../behavioral/chain-of-responsibility-pattern.md)
+- [Command Pattern](../behavioral/command-pattern.md)
+- [Interpreter Pattern](../behavioral/interpreter-pattern.md)
+- [Iterator Pattern](../behavioral/iterator-pattern.md)
+- [Mediator Pattern](../behavioral/mediator-pattern.md)
+- [Memento Pattern](../behavioral/memento-pattern.md)
+- [Observer Pattern](../behavioral/observer-pattern.md)
+- [State Pattern](../behavioral/state-pattern.md)
+- [Strategy Pattern](../behavioral/strategy-pattern.md)
+- [Template Method Pattern](../behavioral/template-pattern.md)
+- [Visitor Pattern](../behavioral/visitor-pattern.md)
 
 ---
 
@@ -77,25 +79,25 @@ These focus on the communication between objects and how responsibilities are as
 
 This is the order I personally recommend for learning and understanding the patterns clearly:
 
-1. [Strategy Pattern](./behavioral/strategy-pattern.md)  
-2. [Composite Pattern](./structural/composite-pattern.md)  
-3. [Observer Pattern](./behavioral/observer-pattern.md)  
-4. [Mediator Pattern](./behavioral/mediator-pattern.md)  
-5. [State Pattern](./behavioral/state-pattern.md)  
-6. [Decorator Pattern](./structural/decorator-pattern.md)  
-7. [Chain of Responsibility Pattern](./behavioral/chain-of-responsibility-pattern.md)  
-8. [Adapter Pattern](./structural/adapter-pattern.md)  
-9. [Command Pattern](./behavioral/command-pattern.md)  
-10. [Proxy Pattern](./structural/proxy-pattern.md)  
-11. [Memento Pattern](./behavioral/memento-pattern.md)  
-12. [Builder Pattern](./creational/builder-pattern.md)  
-13. [Prototype Pattern](./creational/prototype-pattern.md)  
-14. [Factory Pattern](./creational/factory-pattern.md)  
-15. [Abstract Factory Pattern](./creational/abstract-factory-pattern.md)  
-16. [Visitor Pattern](./behavioral/visitor-pattern.md)  
-17. [Flyweight Pattern](./structural/flyweight-pattern.md)  
-18. [Bridge Pattern](./structural/bridge-pattern.md)  
-19. [Singleton Pattern](./creational/singleton-pattern.md)  
+1. [Strategy Pattern](../behavioral/strategy-pattern.md)  
+2. [Composite Pattern](../structural/composite-pattern.md)  
+3. [Observer Pattern](../behavioral/observer-pattern.md)  
+4. [Mediator Pattern](../behavioral/mediator-pattern.md)  
+5. [State Pattern](../behavioral/state-pattern.md)  
+6. [Decorator Pattern](../structural/decorator-pattern.md)  
+7. [Chain of Responsibility Pattern](../behavioral/chain-of-responsibility-pattern.md)  
+8. [Adapter Pattern](../structural/adapter-pattern.md)  
+9. [Command Pattern](../behavioral/command-pattern.md)  
+10. [Proxy Pattern](../structural/proxy-pattern.md)  
+11. [Memento Pattern](../behavioral/memento-pattern.md)  
+12. [Builder Pattern](../creational/builder-pattern.md)  
+13. [Prototype Pattern](../creational/prototype-pattern.md)  
+14. [Factory Pattern](../creational/factory-pattern.md)  
+15. [Abstract Factory Pattern](../creational/abstract-factory-pattern.md)  
+16. [Visitor Pattern](../behavioral/visitor-pattern.md)  
+17. [Flyweight Pattern](../structural/flyweight-pattern.md)  
+18. [Bridge Pattern](../structural/bridge-pattern.md)  
+19. [Singleton Pattern](../creational/singleton-pattern.md)
 
 ---
 
